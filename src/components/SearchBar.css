@@ -1,3 +1,5 @@
+/* ===== SEARCH BAR - BRUTALIST DESIGN ===== */
+
 .search-container {
   position: relative;
   width: 100%;
@@ -7,80 +9,139 @@
 
 .search-icon {
   position: absolute;
-  left: var(--space-md);
+  left: var(--spacing-md);
   top: 50%;
   transform: translateY(-50%);
-  color: var(--color-text-tertiary);
+  color: var(--color-text-secondary);
   pointer-events: none;
   transition: color var(--transition-fast);
+  z-index: 1;
+  stroke-width: 2.5px;
 }
 
 .search-focused .search-icon {
-  color: var(--color-accent);
+  color: var(--color-text-primary);
 }
 
 .search-input {
   width: 100%;
-  padding: var(--space-md) var(--space-xl) var(--space-md) 3rem;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  padding: var(--spacing-md) var(--spacing-xl) var(--spacing-md) 3.5rem;
+  border: 3px solid var(--color-text-primary);
   background: var(--color-surface);
-  font-size: var(--text-lg);
-  font-weight: 400;
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
   color: var(--color-text-primary);
   transition: all var(--transition-base);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-brutalist-md);
+  font-family: var(--font-body);
+  letter-spacing: 0.01em;
 }
 
 .search-input::placeholder {
   color: var(--color-text-tertiary);
+  font-weight: var(--weight-normal);
 }
 
 .search-input:hover {
-  border-color: var(--color-text-tertiary);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-brutalist-lg);
+  transform: translate(-1px, -1px);
 }
 
 .search-input:focus {
   outline: none;
-  border-color: var(--color-accent);
-  box-shadow: var(--shadow-lg), 0 0 0 3px var(--color-accent-light);
+  box-shadow: var(--shadow-brutalist-strong);
+  transform: translate(-2px, -2px);
+}
+
+.search-input:focus-visible {
+  outline: 3px solid var(--color-text-primary);
+  outline-offset: 3px;
 }
 
 .search-clear {
   position: absolute;
-  right: var(--space-md);
+  right: var(--spacing-md);
   top: 50%;
   transform: translateY(-50%);
-  padding: var(--space-xs);
-  color: var(--color-text-tertiary);
-  border-radius: var(--radius-sm);
+  padding: var(--spacing-xs);
+  color: var(--color-text-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all var(--transition-fast);
+  background: var(--color-bg);
+  border: 2px solid var(--color-border);
+  z-index: 1;
 }
 
 .search-clear:hover {
-  color: var(--color-text-primary);
-  background: var(--color-border-subtle);
+  color: var(--color-bg);
+  background: var(--color-text-primary);
+  border-color: var(--color-text-primary);
+  transform: translateY(-50%) scale(1.1);
 }
 
 .search-clear:active {
   transform: translateY(-50%) scale(0.95);
 }
 
-@media (max-width: 640px) {
+.search-clear:focus-visible {
+  outline: 3px solid var(--color-text-primary);
+  outline-offset: 2px;
+}
+
+.search-clear svg {
+  stroke-width: 3px;
+}
+
+/* Keyboard navigation indicator */
+.search-input[data-keyboard-navigation="true"] {
+  animation: borderPulse 2s ease-in-out infinite;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
   .search-input {
-    font-size: var(--text-base);
-    padding: var(--space-sm) var(--space-lg) var(--space-sm) 2.5rem;
+    font-size: var(--text-sm);
+    padding: var(--spacing-sm) var(--spacing-lg) var(--spacing-sm) 3rem;
   }
-  
+
   .search-icon {
-    left: var(--space-sm);
+    left: var(--spacing-sm);
+    width: 18px;
+    height: 18px;
   }
-  
+
   .search-clear {
-    right: var(--space-sm);
+    right: var(--spacing-sm);
+    padding: 0.375rem;
+  }
+
+  .search-clear svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-container {
+    max-width: 100%;
+  }
+
+  .search-input {
+    border-width: 2px;
+    padding: var(--spacing-sm) var(--spacing-md) var(--spacing-sm) 2.5rem;
+    font-size: var(--text-sm);
+  }
+
+  .search-icon {
+    left: 0.75rem;
+    width: 16px;
+    height: 16px;
+  }
+
+  .search-clear {
+    right: 0.75rem;
+    border-width: 1px;
   }
 }

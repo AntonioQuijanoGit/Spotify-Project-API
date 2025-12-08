@@ -43,8 +43,13 @@ function App() {
 
   return (
     <div className="app">
+      {/* Skip to main content link for accessibility */}
+      <a href="#main-content" className="skip-to-content">
+        Skip to main content
+      </a>
+
       {/* Header */}
-      <header className="app-header">
+      <header className="app-header" role="banner">
         <div className="container">
           <div className="header-content">
             <div className="header-text">
@@ -58,7 +63,7 @@ function App() {
       </header>
 
       {/* Main Content */}
-      <main className="app-main">
+      <main className="app-main" id="main-content" role="main">
         <div className="container">
           {/* Search and Filters */}
           <div className="controls-section slide-up">
@@ -122,10 +127,10 @@ function App() {
       </main>
 
       {/* Footer */}
-      <footer className="app-footer">
+      <footer className="app-footer" role="contentinfo">
         <div className="container">
           <p className="footer-text">
-            Built with React + TypeScript • Designed with care for accessibility and user experience
+            Music Genre Explorer — Built with React + TypeScript • Designed for maximum accessibility and user experience
           </p>
         </div>
       </footer>
