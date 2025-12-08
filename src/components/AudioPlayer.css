@@ -1,0 +1,126 @@
+.audio-player {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-sm);
+  background: var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+}
+
+.audio-player:hover {
+  background: var(--color-border);
+}
+
+.audio-player-disabled {
+  opacity: 0.5;
+}
+
+.play-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-text-primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--transition-base);
+}
+
+.play-button:hover:not(:disabled) {
+  background: var(--color-accent);
+  transform: scale(1.05);
+}
+
+.play-button:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.play-button:disabled {
+  background: var(--color-text-tertiary);
+  cursor: not-allowed;
+}
+
+.no-preview-text {
+  font-size: var(--text-sm);
+  color: var(--color-text-tertiary);
+}
+
+.player-controls {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.seek-bar {
+  width: 100%;
+  height: 4px;
+  border-radius: var(--radius-full);
+  background: var(--color-border);
+  appearance: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.seek-bar::-webkit-slider-thumb {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-text-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.seek-bar::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-text-primary);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.seek-bar:hover {
+  height: 6px;
+}
+
+.seek-bar:hover::-webkit-slider-thumb {
+  width: 16px;
+  height: 16px;
+  background: var(--color-accent);
+}
+
+.seek-bar:hover::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: var(--color-accent);
+}
+
+.time-display {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .audio-player {
+    gap: var(--space-sm);
+  }
+  
+  .play-button {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .time-display {
+    font-size: 0.6875rem;
+  }
+}
