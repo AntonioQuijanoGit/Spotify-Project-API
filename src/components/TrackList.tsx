@@ -11,8 +11,8 @@ interface TrackListProps {
 export const TrackList = ({ tracks, loading, error }: TrackListProps) => {
   if (loading) {
     return (
-      <div className="track-list-loading">
-        <div className="loading-spinner" />
+      <div className="track-list-loading" role="status" aria-live="polite" aria-label="Loading tracks">
+        <div className="loading-spinner" aria-hidden="true" />
         <p>Loading tracks from Spotify...</p>
       </div>
     );
@@ -20,8 +20,8 @@ export const TrackList = ({ tracks, loading, error }: TrackListProps) => {
 
   if (error) {
     return (
-      <div className="track-list-error">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <div className="track-list-error" role="alert" aria-live="assertive">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
           <circle cx="12" cy="12" r="10" />
           <line x1="12" y1="8" x2="12" y2="12" />
           <line x1="12" y1="16" x2="12.01" y2="16" />
@@ -34,8 +34,8 @@ export const TrackList = ({ tracks, loading, error }: TrackListProps) => {
 
   if (tracks.length === 0) {
     return (
-      <div className="track-list-empty">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <div className="track-list-empty" role="status" aria-live="polite">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
           <circle cx="12" cy="12" r="10" />
           <line x1="12" y1="16" x2="12" y2="12" />
           <line x1="12" y1="8" x2="12.01" y2="8" />
@@ -46,19 +46,21 @@ export const TrackList = ({ tracks, loading, error }: TrackListProps) => {
   }
 
   return (
-    <div className="track-list">
+    <div className="track-list" role="list" aria-label="Sample tracks">
       {tracks.map((track) => (
-        <article key={track.id} className="track-item">
+        <article key={track.id} className="track-item" role="listitem">
           {/* Album Cover */}
           <div className="track-cover">
             {track.album.images[0] ? (
               <img
                 src={track.album.images[0].url}
-                alt={`${track.album.name} cover`}
+                alt={`${track.album.name} album cover`}
                 loading="lazy"
+                width="64"
+                height="64"
               />
             ) : (
-              <div className="track-cover-placeholder">
+              <div className="track-cover-placeholder" aria-hidden="true">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
                 </svg>
@@ -69,7 +71,7 @@ export const TrackList = ({ tracks, loading, error }: TrackListProps) => {
           {/* Track Info */}
           <div className="track-info">
             <h4 className="track-name">{track.name}</h4>
-            <p className="track-artists">
+            <p className="track-artists" aria-label={`Artists: ${track.artists.map(a => a.name).join(', ')}`}>
               {track.artists.map(a => a.name).join(', ')}
             </p>
             

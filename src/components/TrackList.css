@@ -28,6 +28,13 @@
   to { transform: rotate(360deg); }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .loading-spinner {
+    animation: none;
+    border-top-color: var(--color-accent);
+  }
+}
+
 /* Error State */
 .track-list-error {
   display: flex;
@@ -74,6 +81,12 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   transition: all var(--transition-base);
+  position: relative;
+}
+
+.track-item:focus-within {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-light);
 }
 
 .track-item:hover {
@@ -148,6 +161,13 @@
   text-decoration: none;
   transition: all var(--transition-base);
   white-space: nowrap;
+  min-height: 44px;
+  justify-content: center;
+}
+
+.track-spotify-link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
 }
 
 .track-spotify-link:hover {
@@ -191,6 +211,7 @@
   
   .track-item {
     padding: var(--space-sm);
+    gap: var(--space-sm);
   }
   
   .track-cover {
@@ -200,9 +221,26 @@
   
   .track-name {
     font-size: var(--text-sm);
+    line-height: var(--leading-snug);
   }
   
   .track-artists {
     font-size: var(--text-xs);
+  }
+  
+  .track-spotify-link {
+    min-height: 44px;
+    padding: var(--space-sm);
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .track-item:active {
+    transform: scale(0.98);
+  }
+  
+  .track-spotify-link:active {
+    transform: scale(0.95);
   }
 }

@@ -17,8 +17,8 @@
 }
 
 .play-button {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: var(--color-text-primary);
   color: white;
@@ -27,6 +27,13 @@
   justify-content: center;
   flex-shrink: 0;
   transition: all var(--transition-base);
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.play-button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
 }
 
 .play-button:hover:not(:disabled) {
@@ -113,14 +120,52 @@
 @media (max-width: 640px) {
   .audio-player {
     gap: var(--space-sm);
+    padding: var(--space-xs);
   }
   
   .play-button {
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
   }
   
   .time-display {
     font-size: 0.6875rem;
+  }
+  
+  .seek-bar {
+    min-height: 6px;
+  }
+  
+  .seek-bar::-webkit-slider-thumb {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .seek-bar::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .play-button:active {
+    transform: scale(0.9);
+  }
+  
+  .seek-bar {
+    min-height: 8px;
+  }
+  
+  .seek-bar::-webkit-slider-thumb {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .seek-bar::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
   }
 }

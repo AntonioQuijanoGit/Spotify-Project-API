@@ -1,11 +1,17 @@
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(28, 25, 23, 0.6);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  background: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   z-index: 999;
-  animation: fadeIn 0.3s var(--transition-base);
+  animation: fadeIn 0.3s var(--ease-out);
+}
+
+@media (prefers-color-scheme: dark) {
+  .modal-backdrop {
+    background: rgba(0, 0, 0, 0.85);
+  }
 }
 
 .modal-container {
@@ -29,8 +35,9 @@
   max-height: 90vh;
   display: flex;
   flex-direction: column;
-  animation: scaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: scaleIn 0.4s var(--ease-out);
   margin: auto;
+  border: 1px solid var(--color-border);
 }
 
 /* Header */
@@ -184,6 +191,13 @@
   text-align: left;
   transition: all var(--transition-base);
   width: 100%;
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.related-genre-card:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
 }
 
 .related-genre-card:hover {
@@ -241,8 +255,20 @@
 @keyframes slideUp {
   from {
     transform: translateY(100%);
+    opacity: 0;
   }
   to {
     transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal-content {
+    animation: none;
+  }
+  
+  .modal-backdrop {
+    animation: none;
   }
 }

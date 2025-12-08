@@ -25,11 +25,11 @@
 .app-title {
   font-family: var(--font-display);
   font-size: var(--text-5xl);
-  font-weight: 400;
+  font-weight: 700;
   color: var(--color-text-primary);
   margin: 0 0 var(--space-md) 0;
   line-height: var(--leading-tight);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 }
 
 .app-subtitle {
@@ -89,7 +89,7 @@
 .empty-title {
   font-family: var(--font-display);
   font-size: var(--text-3xl);
-  font-weight: 400;
+  font-weight: 600;
   color: var(--color-text-primary);
   margin: 0 0 var(--space-sm) 0;
 }
@@ -114,7 +114,7 @@
   line-height: var(--leading-relaxed);
 }
 
-/* Responsive */
+/* Responsive - Mobile First Approach */
 @media (max-width: 1024px) {
   .genres-grid {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -129,6 +129,7 @@
   
   .app-title {
     font-size: var(--text-4xl);
+    letter-spacing: -0.02em;
   }
   
   .app-subtitle {
@@ -165,9 +166,34 @@
 @media (max-width: 640px) {
   .app-title {
     font-size: var(--text-3xl);
+    letter-spacing: -0.02em;
   }
   
   .app-subtitle {
     font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+  }
+  
+  .results-count {
+    font-size: var(--text-xs);
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .genre-card:hover {
+    transform: none;
+  }
+  
+  .genre-card:active {
+    transform: scale(0.98);
+  }
+  
+  .category-button:hover {
+    background: var(--color-surface);
+  }
+  
+  .category-button:active {
+    background: var(--color-border-subtle);
   }
 }

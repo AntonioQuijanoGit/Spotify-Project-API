@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import './SearchBar.css';
 
 interface SearchBarProps {
@@ -9,9 +9,24 @@ interface SearchBarProps {
 
 export const SearchBar = ({ value, onChange, placeholder = 'Search genres...' }: SearchBarProps) => {
   const [isFocused, setIsFocused] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleClear = () => {
+    onChange('');
+    inputRef.current?.focus();
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Escape' && value) {
+      handleClear();
+    }
+  };
 
   return (
     <div className={`search-container ${isFocused ? 'search-focused' : ''}`}>
+      <label htmlFor="genre-search" className="visually-hidden">
+        Search for music genres
+      </label>
       <svg 
         className="search-icon" 
         width="20" 
@@ -28,20 +43,26 @@ export const SearchBar = ({ value, onChange, placeholder = 'Search genres...' }:
         <path d="m21 21-4.35-4.35" />
       </svg>
       <input
-        type="text"
+        ref={inputRef}
+        id="genre-search"
+        type="search"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
+        onKeyDown={handleKeyDown}
         placeholder={placeholder}
         className="search-input"
         aria-label="Search for music genres"
+        aria-describedby={value ? "search-results-count" : undefined}
+        autoComplete="off"
       />
       {value && (
         <button
-          onClick={() => onChange('')}
+          onClick={handleClear}
           className="search-clear"
           aria-label="Clear search"
+          type="button"
         >
           <svg 
             width="16" 
@@ -52,6 +73,7 @@ export const SearchBar = ({ value, onChange, placeholder = 'Search genres...' }:
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
+            aria-hidden="true"
           >
             <line x1="18" y1="6" x2="6" y2="18" />
             <line x1="6" y1="6" x2="18" y2="18" />

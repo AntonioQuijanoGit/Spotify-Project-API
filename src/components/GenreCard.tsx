@@ -7,15 +7,37 @@ interface GenreCardProps {
 }
 
 export const GenreCard = ({ genre, onClick }: GenreCardProps) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onClick();
+    }
+  };
+
   return (
-    <article className="genre-card" onClick={onClick}>
-      <div className="genre-card-accent" style={{ backgroundColor: genre.color }} />
+    <article 
+      className="genre-card" 
+      onClick={onClick}
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+      role="button"
+      aria-label={`Explore ${genre.name} genre`}
+    >
+      <div 
+        className="genre-card-accent" 
+        style={{ backgroundColor: genre.color }}
+        aria-hidden="true"
+      />
       
       <div className="genre-card-content">
         <div className="genre-card-header">
-          <span className="genre-card-category">{genre.category}</span>
+          <span className="genre-card-category" aria-label={`Category: ${genre.category}`}>
+            {genre.category}
+          </span>
           {genre.originYear && (
-            <span className="genre-card-year">{genre.originYear}</span>
+            <time className="genre-card-year" dateTime={genre.originYear.toString()}>
+              {genre.originYear}
+            </time>
           )}
         </div>
         
@@ -23,7 +45,7 @@ export const GenreCard = ({ genre, onClick }: GenreCardProps) => {
         
         <p className="genre-card-description">{genre.description}</p>
         
-        <div className="genre-card-characteristics">
+        <div className="genre-card-characteristics" aria-label="Genre characteristics">
           {genre.characteristics.slice(0, 3).map((char, i) => (
             <span key={i} className="characteristic-badge">
               {char}
@@ -35,7 +57,8 @@ export const GenreCard = ({ genre, onClick }: GenreCardProps) => {
       <div className="genre-card-footer">
         <button 
           className="genre-card-button"
-          aria-label={`Explore ${genre.name}`}
+          aria-label={`Explore ${genre.name} genre`}
+          type="button"
         >
           <span>Explore</span>
           <svg 

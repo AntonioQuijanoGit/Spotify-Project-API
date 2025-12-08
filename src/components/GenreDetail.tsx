@@ -15,13 +15,47 @@ export const GenreDetail = ({ genre, onClose, onNavigateToGenre }: GenreDetailPr
   const relatedGenres = getRelatedGenres(genre.id);
   const { tracks, loading, error } = useSpotifyTracks(genre.id);
 
-  // Close on Escape key
+  // Close on Escape key and trap focus
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
     };
+    
+    // Focus trap
+    const modal = document.querySelector('.modal-container') as HTMLElement;
+    const focusableElements = modal?.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    ) as NodeListOf<HTMLElement>;
+    
+    const firstElement = focusableElements?.[0];
+    const lastElement = focusableElements?.[focusableElements.length - 1];
+    
+    const handleTab = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return;
+      
+      if (e.shiftKey) {
+        if (document.activeElement === firstElement) {
+          e.preventDefault();
+          lastElement?.focus();
+        }
+      } else {
+        if (document.activeElement === lastElement) {
+          e.preventDefault();
+          firstElement?.focus();
+        }
+      }
+    };
+    
     window.addEventListener('keydown', handleEscape);
-    return () => window.removeEventListener('keydown', handleEscape);
+    window.addEventListener('keydown', handleTab);
+    
+    // Focus first element when modal opens
+    firstElement?.focus();
+    
+    return () => {
+      window.removeEventListener('keydown', handleEscape);
+      window.removeEventListener('keydown', handleTab);
+    };
   }, [onClose]);
 
   // Prevent body scroll
@@ -32,11 +66,27 @@ export const GenreDetail = ({ genre, onClose, onNavigateToGenre }: GenreDetailPr
     };
   }, []);
 
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
   return (
     <>
-      <div className="modal-backdrop" onClick={onClose} />
+      <div 
+        className="modal-backdrop" 
+        onClick={handleBackdropClick}
+        aria-hidden="true"
+      />
       
-      <div className="modal-container" role="dialog" aria-modal="true" aria-labelledby="genre-title">
+      <div 
+        className="modal-container" 
+        role="dialog" 
+        aria-modal="true" 
+        aria-labelledby="genre-title"
+        aria-describedby="genre-description"
+      >
         <div className="modal-content">
           {/* Header */}
           <header className="modal-header">
@@ -67,7 +117,7 @@ export const GenreDetail = ({ genre, onClose, onNavigateToGenre }: GenreDetailPr
             {/* Description */}
             <section className="detail-section">
               <h3 className="section-heading">About</h3>
-              <p className="genre-detail-description">{genre.description}</p>
+              <p id="genre-description" className="genre-detail-description">{genre.description}</p>
             </section>
 
             {/* Characteristics */}
@@ -116,6 +166,8 @@ export const GenreDetail = ({ genre, onClose, onNavigateToGenre }: GenreDetailPr
                       onClick={() => onNavigateToGenre(related.id)}
                       className="related-genre-card"
                       style={{ borderLeftColor: related.color }}
+                      aria-label={`Navigate to ${related.name} genre`}
+                      type="button"
                     >
                       <span className="related-genre-name">{related.name}</span>
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">

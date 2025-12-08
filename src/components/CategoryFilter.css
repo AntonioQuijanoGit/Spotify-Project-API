@@ -15,6 +15,8 @@
   border-radius: var(--radius-full);
   transition: all var(--transition-base);
   white-space: nowrap;
+  min-height: 44px;
+  position: relative;
 }
 
 .category-button:hover {
@@ -42,6 +44,7 @@
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    padding-bottom: var(--space-xs);
   }
   
   .category-filter::-webkit-scrollbar {
@@ -50,6 +53,15 @@
   
   .category-button {
     font-size: var(--text-xs);
-    padding: var(--space-xs) var(--space-md);
+    padding: var(--space-sm) var(--space-md);
+    min-height: 44px;
+    flex-shrink: 0;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .category-button:active {
+    transform: scale(0.95);
   }
 }

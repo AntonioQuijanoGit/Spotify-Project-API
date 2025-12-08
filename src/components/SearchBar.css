@@ -30,6 +30,11 @@
   color: var(--color-text-primary);
   transition: all var(--transition-base);
   box-shadow: var(--shadow-sm);
+  min-height: 48px;
+}
+
+.search-input::-webkit-search-cancel-button {
+  display: none;
 }
 
 .search-input::placeholder {
@@ -59,6 +64,8 @@
   align-items: center;
   justify-content: center;
   transition: all var(--transition-fast);
+  min-width: 32px;
+  min-height: 32px;
 }
 
 .search-clear:hover {

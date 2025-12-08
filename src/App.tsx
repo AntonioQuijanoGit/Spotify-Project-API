@@ -43,8 +43,13 @@ function App() {
 
   return (
     <div className="app">
+      {/* Skip to main content link for accessibility */}
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
+
       {/* Header */}
-      <header className="app-header">
+      <header className="app-header" role="banner">
         <div className="container">
           <div className="header-content">
             <div className="header-text">
@@ -58,10 +63,10 @@ function App() {
       </header>
 
       {/* Main Content */}
-      <main className="app-main">
+      <main id="main-content" className="app-main" role="main" aria-label="Main content">
         <div className="container">
           {/* Search and Filters */}
-          <div className="controls-section slide-up">
+          <section className="controls-section slide-up" aria-label="Search and filter controls">
             <SearchBar
               value={searchQuery}
               onChange={setSearchQuery}
@@ -73,22 +78,34 @@ function App() {
               selectedCategory={selectedCategory}
               onCategoryChange={setSelectedCategory}
             />
-          </div>
+          </section>
 
           {/* Results Count */}
-          <div className="results-info slide-up stagger-1">
+          <div 
+            id="search-results-count"
+            className="results-info slide-up stagger-1" 
+            role="status" 
+            aria-live="polite" 
+            aria-atomic="true"
+          >
             <p className="results-count">
+              <span className="visually-hidden">Search results: </span>
               {filteredGenres.length} {filteredGenres.length === 1 ? 'genre' : 'genres'} found
             </p>
           </div>
 
           {/* Genres Grid */}
           {filteredGenres.length > 0 ? (
-            <div className="genres-grid">
+            <section 
+              className="genres-grid" 
+              aria-label="Music genres"
+              role="list"
+            >
               {filteredGenres.map((genre, index) => (
                 <div
                   key={genre.id}
                   className={`genre-grid-item slide-up stagger-${Math.min(index % 6 + 2, 6)}`}
+                  role="listitem"
                 >
                   <GenreCard
                     genre={genre}
@@ -96,9 +113,9 @@ function App() {
                   />
                 </div>
               ))}
-            </div>
+            </section>
           ) : (
-            <div className="empty-state slide-up stagger-2">
+            <div className="empty-state slide-up stagger-2" role="status" aria-live="polite">
               <svg 
                 width="48" 
                 height="48" 
@@ -108,11 +125,12 @@ function App() {
                 strokeWidth="1.5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
+                aria-hidden="true"
               >
                 <circle cx="11" cy="11" r="8" />
                 <path d="m21 21-4.35-4.35" />
               </svg>
-              <h3 className="empty-title">No genres found</h3>
+              <h2 className="empty-title">No genres found</h2>
               <p className="empty-description">
                 Try adjusting your search or filters
               </p>
@@ -122,7 +140,7 @@ function App() {
       </main>
 
       {/* Footer */}
-      <footer className="app-footer">
+      <footer className="app-footer" role="contentinfo">
         <div className="container">
           <p className="footer-text">
             Built with React + TypeScript • Designed with care for accessibility and user experience
