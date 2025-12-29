@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, type ReactElement } from 'react';
 import type { TabType } from './TabNavigation';
 import './MobileMenu.css';
 
@@ -7,7 +7,7 @@ interface MobileMenuProps {
   onTabChange: (tab: TabType) => void;
 }
 
-const allTabs: Array<{ id: TabType; label: string; icon: JSX.Element }> = [
+const allTabs: Array<{ id: TabType; label: string; icon: ReactElement }> = [
   {
     id: 'genres',
     label: 'Genres',
