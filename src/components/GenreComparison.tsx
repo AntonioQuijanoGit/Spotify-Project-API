@@ -160,3 +160,4 @@ export const GenreComparison = ({ onClose }: GenreComparisonProps) => {
 
 
 
+

@@ -127,7 +127,7 @@ function App() {
         Skip to main content
       </a>
 
-      <AppHeader />
+      <AppHeader activeTab={activeTab} onTabChange={setActiveTab} />
 
       {/* Main Content */}
       <main id="main-content" className="app-main" role="main" aria-label="Main content">

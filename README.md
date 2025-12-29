@@ -138,15 +138,42 @@ music-explorer/
 - `npm run build` - Build for production
 - `npm run preview` - Preview production build
 - `npm run lint` - Run ESLint
+- `npm run test` - Run tests in watch mode
+- `npm run test:run` - Run tests once
+- `npm run test:ui` - Run tests with UI
+- `npm run test:coverage` - Run tests with coverage report
 
 ## 🎨 Tech Stack
 
 - **React 19.2** - UI library
 - **TypeScript 5.9** - Type safety
 - **Vite 7.2** - Build tool and dev server
+- **Vitest** - Fast unit testing framework
+- **React Testing Library** - Component testing utilities
 - **Recharts** - Data visualization
 - **Vis-Network** - Network/graph visualizations
 - **Spotify Web API** - Music data
+
+## 🧪 Testing
+
+The project uses **Vitest** and **React Testing Library** for comprehensive testing:
+
+- **Unit Tests**: Component logic and hooks
+- **Integration Tests**: Component interactions
+- **Accessibility Tests**: ARIA attributes and keyboard navigation
+
+Run tests:
+```bash
+npm run test          # Watch mode
+npm run test:run      # Single run
+npm run test:coverage # With coverage report
+```
+
+Current test coverage includes:
+- ✅ Component rendering and interactions
+- ✅ Custom hooks (useTheme, useFavorites)
+- ✅ Utility functions
+- ✅ Accessibility features
 
 ## 📱 Responsive Design
 

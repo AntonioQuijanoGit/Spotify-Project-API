@@ -7,6 +7,12 @@
   z-index: var(--z-sticky);
 }
 
+@media (max-width: 1024px) {
+  .tab-navigation {
+    display: none;
+  }
+}
+
 .tab-navigation::after {
   content: '';
   position: absolute;
