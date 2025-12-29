@@ -1,0 +1,54 @@
+.popularity-container {
+  padding: var(--space-2xl);
+  background: var(--color-surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+}
+
+.popularity-header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.popularity-header h2 {
+  margin: 0 0 var(--space-sm) 0;
+  font-size: var(--text-3xl);
+  background: var(--color-accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.popularity-header p {
+  color: var(--color-text-secondary);
+  font-size: var(--text-lg);
+}
+
+.popularity-charts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: var(--space-xl);
+}
+
+.popularity-chart-card {
+  padding: var(--space-xl);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.popularity-chart-card h3 {
+  margin: 0 0 var(--space-lg) 0;
+  font-size: var(--text-xl);
+  color: var(--color-text-primary);
+}
+
+@media (max-width: 768px) {
+  .popularity-charts {
+    grid-template-columns: 1fr;
+  }
+}
+

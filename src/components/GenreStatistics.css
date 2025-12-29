@@ -1,0 +1,114 @@
+.statistics-container {
+  padding: var(--space-2xl);
+}
+
+.statistics-header {
+  margin-bottom: var(--space-2xl);
+  text-align: center;
+}
+
+.statistics-header h2 {
+  margin: 0 0 var(--space-sm) 0;
+  font-size: var(--text-3xl);
+}
+
+.statistics-header p {
+  margin: 0 0 var(--space-md) 0;
+  color: var(--color-text-secondary);
+  font-size: var(--text-lg);
+}
+
+.statistics-explanation {
+  margin-top: var(--space-xl);
+  padding: var(--space-lg);
+  background: var(--color-surface-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  text-align: left;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.statistics-explanation p {
+  margin: var(--space-sm) 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+}
+
+.statistics-explanation p:first-child {
+  margin-top: 0;
+}
+
+.statistics-explanation p:last-child {
+  margin-bottom: 0;
+}
+
+.statistics-explanation strong {
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
+.statistics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: var(--space-xl);
+}
+
+.stat-card {
+  padding: var(--space-xl);
+  background: var(--color-surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+
+.stat-card h3 {
+  margin: 0 0 var(--space-lg) 0;
+  font-size: var(--text-xl);
+  font-weight: 600;
+}
+
+.stat-summary {
+  display: flex;
+  flex-direction: column;
+}
+
+.summary-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg);
+}
+
+.summary-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.summary-label {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.summary-value {
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+@media (max-width: 768px) {
+  .statistics-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .summary-stats {
+    grid-template-columns: 1fr;
+  }
+}
+

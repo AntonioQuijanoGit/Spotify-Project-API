@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  music-explorer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: music-explorer-app
+    ports:
+      - "3000:80"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    networks:
+      - music-explorer-network
+
+networks:
+  music-explorer-network:
+    driver: bridge
+

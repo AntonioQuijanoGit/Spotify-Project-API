@@ -1,0 +1,130 @@
+.genre-list-view {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.genre-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-lg);
+  background: var(--color-surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-xs);
+}
+
+.genre-list-item:hover {
+  transform: translateX(4px);
+  border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-md);
+}
+
+.genre-list-content {
+  flex: 1;
+}
+
+.genre-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-sm);
+}
+
+.genre-list-header h3 {
+  margin: 0;
+  font-size: var(--text-xl);
+  font-weight: 600;
+}
+
+.favorite-btn {
+  padding: var(--space-xs);
+  color: var(--color-text-tertiary);
+  transition: all var(--transition-fast);
+}
+
+.favorite-btn:hover {
+  color: var(--color-error);
+  transform: scale(1.1);
+}
+
+.favorite-btn.active {
+  color: var(--color-error);
+}
+
+.genre-list-description {
+  margin: 0 0 var(--space-sm) 0;
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+}
+
+.genre-list-meta {
+  display: flex;
+  gap: var(--space-md);
+  margin-bottom: var(--space-sm);
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+}
+
+.genre-category {
+  text-transform: capitalize;
+  font-weight: 600;
+}
+
+.genre-year {
+  font-weight: 500;
+}
+
+.genre-characteristics-count {
+  font-weight: 500;
+}
+
+.genre-list-characteristics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.characteristic-badge {
+  padding: 2px var(--space-xs);
+  background: var(--color-border-subtle);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+}
+
+.characteristic-more {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  font-style: italic;
+}
+
+.genre-list-arrow {
+  flex-shrink: 0;
+  margin-left: var(--space-lg);
+  color: var(--color-text-tertiary);
+  transition: all var(--transition-base);
+}
+
+.genre-list-item:hover .genre-list-arrow {
+  color: var(--color-accent);
+  transform: translateX(4px);
+}
+
+@media (max-width: 640px) {
+  .genre-list-item {
+    padding: var(--space-md);
+  }
+  
+  .genre-list-meta {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+}
+

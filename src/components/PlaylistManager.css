@@ -1,0 +1,129 @@
+.playlist-modal {
+  max-width: 600px;
+}
+
+.create-playlist-btn {
+  width: 100%;
+  padding: var(--space-md);
+  margin-bottom: var(--space-lg);
+  background: var(--color-accent);
+  color: var(--color-bg);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  transition: all var(--transition-base);
+}
+
+.create-playlist-btn:hover {
+  background: var(--color-accent-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.create-playlist-form {
+  padding: var(--space-lg);
+  background: var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-lg);
+}
+
+.playlist-name-input {
+  width: 100%;
+  padding: var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  font-size: var(--text-base);
+  margin-bottom: var(--space-md);
+}
+
+.create-playlist-actions {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.save-btn,
+.cancel-btn {
+  flex: 1;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+}
+
+.save-btn {
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
+
+.cancel-btn {
+  background: var(--color-border);
+  color: var(--color-text-primary);
+}
+
+.playlists-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.playlist-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+}
+
+.playlist-item:hover {
+  border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-sm);
+}
+
+.playlist-info h3 {
+  margin: 0 0 var(--space-xs) 0;
+  font-size: var(--text-base);
+}
+
+.playlist-info p {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.playlist-actions {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.add-to-playlist-btn {
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-accent);
+  color: var(--color-bg);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: var(--text-sm);
+}
+
+.delete-playlist-btn {
+  padding: var(--space-xs);
+  color: var(--color-text-tertiary);
+  transition: all var(--transition-fast);
+}
+
+.delete-playlist-btn:hover {
+  color: var(--color-error);
+}
+
+.empty-playlists {
+  padding: var(--space-2xl);
+  text-align: center;
+  color: var(--color-text-tertiary);
+}
+

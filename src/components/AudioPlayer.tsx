@@ -4,13 +4,16 @@ import './AudioPlayer.css';
 interface AudioPlayerProps {
   previewUrl: string | null;
   trackName: string;
+  autoPlay?: boolean;
+  onEnded?: () => void;
 }
 
-export const AudioPlayer = ({ previewUrl, trackName }: AudioPlayerProps) => {
+export const AudioPlayer = ({ previewUrl, trackName, autoPlay = false, onEnded }: AudioPlayerProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(30); // Previews are ~30s
   const audioRef = useRef<HTMLAudioElement>(null);
+  const hasInteractedRef = useRef(false);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -18,7 +21,12 @@ export const AudioPlayer = ({ previewUrl, trackName }: AudioPlayerProps) => {
 
     const updateTime = () => setCurrentTime(audio.currentTime);
     const updateDuration = () => setDuration(audio.duration || 30);
-    const handleEnded = () => setIsPlaying(false);
+    const handleEnded = () => {
+      setIsPlaying(false);
+      if (onEnded) {
+        onEnded();
+      }
+    };
 
     audio.addEventListener('timeupdate', updateTime);
     audio.addEventListener('loadedmetadata', updateDuration);
@@ -29,29 +37,82 @@ export const AudioPlayer = ({ previewUrl, trackName }: AudioPlayerProps) => {
       audio.removeEventListener('loadedmetadata', updateDuration);
       audio.removeEventListener('ended', handleEnded);
     };
-  }, []);
+  }, [onEnded]);
 
-  // Stop playing when preview URL changes
+  // Stop playing when preview URL changes and handle autoPlay
   useEffect(() => {
     const audio = audioRef.current;
-    if (audio) {
+    if (audio && previewUrl) {
+      // Reset audio
       audio.pause();
       audio.currentTime = 0;
       setIsPlaying(false);
       setCurrentTime(0);
+      // Load new source
+      audio.load();
+      
+      // Auto-play if requested - wait for audio to be ready
+      // Only auto-play if user has already interacted (clicked play/start radio)
+      if (autoPlay && hasInteractedRef.current) {
+        const attemptPlay = () => {
+          const playPromise = audio.play();
+          if (playPromise !== undefined) {
+            playPromise
+              .then(() => {
+                setIsPlaying(true);
+              })
+              .catch((error) => {
+                // Auto-play was prevented by browser
+                // This can happen if too much time passed since user interaction
+                if (import.meta.env.DEV) {
+                  console.log('Auto-play prevented:', error);
+                }
+                setIsPlaying(false);
+              });
+          }
+        };
+        
+        const handleCanPlay = () => {
+          attemptPlay();
+          audio.removeEventListener('canplay', handleCanPlay);
+        };
+        
+        // If already loaded enough, try immediately
+        if (audio.readyState >= 2) {
+          attemptPlay();
+        } else {
+          audio.addEventListener('canplay', handleCanPlay);
+        }
+        
+        return () => {
+          audio.removeEventListener('canplay', handleCanPlay);
+        };
+      }
     }
-  }, [previewUrl]);
+  }, [previewUrl, autoPlay]);
 
   const togglePlay = () => {
     const audio = audioRef.current;
     if (!audio || !previewUrl) return;
 
+    hasInteractedRef.current = true; // Mark that user has interacted
+    
     if (isPlaying) {
       audio.pause();
+      setIsPlaying(false);
     } else {
-      audio.play();
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            setIsPlaying(true);
+          })
+          .catch((error) => {
+            console.error('Play failed:', error);
+            setIsPlaying(false);
+          });
+      }
     }
-    setIsPlaying(!isPlaying);
   };
 
   const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -71,13 +132,20 @@ export const AudioPlayer = ({ previewUrl, trackName }: AudioPlayerProps) => {
 
   if (!previewUrl) {
     return (
-      <div className="audio-player audio-player-disabled">
+      <div className="audio-player audio-player-disabled" aria-label="Audio preview not available for this track">
         <button className="play-button" disabled aria-label="Preview not available">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M8 5v14l11-7z" />
           </svg>
         </button>
-        <span className="no-preview-text">Preview not available</span>
+        <div className="no-preview-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+          <span>No preview</span>
+        </div>
       </div>
     );
   }

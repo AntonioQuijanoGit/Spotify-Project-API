@@ -1,0 +1,99 @@
+.app-header {
+  padding: var(--space-3xl) 0 var(--space-2xl);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  position: relative;
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.05);
+}
+
+.dark-mode .app-header {
+  background: rgba(26, 26, 26, 0.9);
+  border-bottom-color: var(--color-border);
+}
+
+.app-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+  opacity: 0.5;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-xl);
+}
+
+.header-text {
+  flex: 1;
+}
+
+.app-title {
+  font-family: var(--font-display);
+  font-size: var(--text-5xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0 0 var(--space-md) 0;
+  line-height: var(--leading-tight);
+  letter-spacing: -0.04em;
+  animation: fadeIn 0.6s var(--ease-out);
+  position: relative;
+}
+
+.dark-mode .app-title {
+  background: var(--color-accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.app-subtitle {
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  line-height: var(--leading-relaxed);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  animation: fadeIn 0.8s var(--ease-out) 0.1s both;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    padding: var(--space-2xl) 0 var(--space-xl);
+  }
+  
+  .app-title {
+    font-size: var(--text-4xl);
+    letter-spacing: -0.02em;
+  }
+  
+  .app-subtitle {
+    font-size: var(--text-lg);
+  }
+}
+
+@media (max-width: 640px) {
+  .app-title {
+    font-size: var(--text-3xl);
+    letter-spacing: -0.02em;
+  }
+  
+  .app-subtitle {
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+  }
+}
+

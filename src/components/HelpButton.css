@@ -1,0 +1,62 @@
+.help-button {
+  position: fixed !important;
+  bottom: 24px !important;
+  right: 24px !important;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-fixed);
+  transition: all var(--transition-base) var(--ease-out);
+  will-change: transform, box-shadow;
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  animation: fadeIn 0.4s var(--ease-out) 0.3s both;
+  opacity: 1 !important;
+  visibility: visible !important;
+  overflow: visible;
+  padding: 0;
+}
+
+.help-button:hover {
+  background: var(--color-surface-elevated);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-border-hover);
+}
+
+.help-button:active {
+  transform: translateY(0);
+  transition: transform var(--transition-fast);
+}
+
+.help-button svg {
+  transition: transform var(--transition-base) var(--ease-out);
+  position: relative;
+  z-index: 1;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+.help-button:hover svg {
+  transform: scale(1.1);
+}
+
+@media (max-width: 640px) {
+  .help-button {
+    bottom: var(--space-lg);
+    right: var(--space-lg);
+    width: 48px;
+    height: 48px;
+  }
+}
+

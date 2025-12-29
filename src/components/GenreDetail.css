@@ -1,10 +1,10 @@
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(10, 10, 10, 0.7);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  z-index: 999;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  z-index: var(--z-modal-backdrop);
   animation: fadeIn 0.3s var(--ease-out);
 }
 
@@ -17,7 +17,7 @@
 .modal-container {
   position: fixed;
   inset: 0;
-  z-index: 1000;
+  z-index: var(--z-modal);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,22 +28,37 @@
 
 .modal-content {
   background: var(--color-surface);
-  border-radius: var(--radius-xl);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-xl);
   width: 100%;
   max-width: 700px;
   max-height: 90vh;
   display: flex;
   flex-direction: column;
-  animation: scaleIn 0.4s var(--ease-out);
+  animation: fadeInScale 0.4s var(--ease-out);
   margin: auto;
   border: 1px solid var(--color-border);
+  position: relative;
+  overflow: hidden;
+}
+
+.modal-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-border), transparent);
 }
 
 /* Header */
 .modal-header {
   position: relative;
   padding: var(--space-2xl);
+  padding-right: calc(var(--space-2xl) + 48px); /* Space for close button */
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -51,6 +66,25 @@
   display: flex;
   gap: var(--space-lg);
   align-items: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+  padding-right: 48px; /* Space to avoid overlap with close button */
+}
+
+.genre-share-btn {
+  margin-left: auto;
+}
+
+@media (max-width: 768px) {
+  .modal-header-content {
+    padding-right: 0;
+  }
+  
+  .genre-share-btn {
+    margin-left: 0;
+    width: 100%;
+    margin-top: var(--space-md);
+  }
 }
 
 .genre-accent-bar {
@@ -93,6 +127,15 @@
   color: var(--color-text-tertiary);
   border-radius: var(--radius-sm);
   transition: all var(--transition-fast);
+  background: transparent;
+  border: none;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  cursor: pointer;
 }
 
 .modal-close:hover {

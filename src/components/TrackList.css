@@ -8,11 +8,33 @@
 .track-list-loading {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: var(--space-3xl) var(--space-lg);
   gap: var(--space-md);
-  color: var(--color-text-secondary);
+}
+
+.track-item-skeleton {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--space-md);
+  align-items: start;
+  padding: var(--space-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.skeleton-cover {
+  border-radius: var(--radius-sm);
+}
+
+.skeleton-track-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  min-width: 0;
+}
+
+.skeleton-margin {
+  margin-top: var(--space-xs);
 }
 
 .loading-spinner {
@@ -22,6 +44,18 @@
   border-top-color: var(--color-accent);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
+  position: relative;
+}
+
+.loading-spinner::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border: 3px solid transparent;
+  border-top-color: var(--color-accent);
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: spin 1.2s linear infinite reverse;
 }
 
 @keyframes spin {
@@ -40,19 +74,65 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-sm);
-  padding: var(--space-2xl) var(--space-lg);
+  gap: var(--space-md);
+  padding: var(--space-3xl) var(--space-lg);
   text-align: center;
+  background: rgba(239, 68, 68, 0.05);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: var(--radius-lg);
   color: var(--color-text-secondary);
 }
 
-.track-list-error svg {
-  color: var(--color-accent);
+.error-icon-wrapper {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(239, 68, 68, 0.1);
+  border-radius: var(--radius-full);
+  color: var(--color-error);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.track-list-error h3 {
+  margin: 0;
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.error-message {
+  margin: 0;
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  max-width: 500px;
 }
 
 .error-detail {
-  font-size: var(--text-sm);
+  font-size: var(--text-xs);
   color: var(--color-text-tertiary);
+  font-family: var(--font-mono);
+  padding: var(--space-sm);
+  background: var(--color-surface-elevated);
+  border-radius: var(--radius-sm);
+  word-break: break-all;
+}
+
+.error-retry-button {
+  margin-top: var(--space-sm);
+  padding: var(--space-sm) var(--space-lg);
+  background: var(--color-error);
+  color: var(--color-bg);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  transition: all var(--transition-base);
+}
+
+.error-retry-button:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
 }
 
 /* Empty State */
@@ -82,16 +162,36 @@
   border-radius: var(--radius-lg);
   transition: all var(--transition-base);
   position: relative;
+  will-change: transform, box-shadow, border-color;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.track-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, transparent, var(--color-border-subtle), transparent);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  pointer-events: none;
+}
+
+.track-item:hover::before {
+  opacity: 1;
 }
 
 .track-item:focus-within {
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px var(--color-accent-light);
+  box-shadow: var(--shadow-sm), 0 0 0 3px var(--color-border-subtle);
+  transform: translateY(-1px);
 }
 
 .track-item:hover {
-  border-color: var(--color-text-tertiary);
-  box-shadow: var(--shadow-md);
+  border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
 }
 
 /* Album Cover */
@@ -102,6 +202,13 @@
   overflow: hidden;
   flex-shrink: 0;
   background: var(--color-border-subtle);
+  transition: transform var(--transition-base);
+  box-shadow: var(--shadow-xs);
+}
+
+.track-item:hover .track-cover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-sm);
 }
 
 .track-cover img {
@@ -146,13 +253,42 @@
   white-space: nowrap;
 }
 
+/* Track Actions */
+.track-actions {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.track-playlist-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-surface-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  transition: all var(--transition-base);
+}
+
+.track-playlist-btn:hover {
+  background: var(--color-accent);
+  color: var(--color-bg);
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
 /* Spotify Link */
 .track-spotify-link {
   display: flex;
   align-items: center;
   gap: var(--space-xs);
   padding: var(--space-sm) var(--space-md);
-  background: transparent;
+  background: var(--color-surface-elevated);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   color: var(--color-text-secondary);
@@ -162,6 +298,23 @@
   transition: all var(--transition-base);
   white-space: nowrap;
   min-height: 44px;
+  position: relative;
+  overflow: hidden;
+  will-change: transform, background-color;
+}
+
+.track-spotify-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent, var(--color-border-subtle), transparent);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.track-spotify-link:hover::before {
+  opacity: 1;
+}
   justify-content: center;
 }
 
@@ -173,9 +326,14 @@
 .track-spotify-link:hover {
   background: #1db954;
   border-color: #1db954;
-  color: white;
+  color: var(--color-bg);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(29, 185, 84, 0.2);
+  box-shadow: 0 4px 12px rgba(29, 185, 84, 0.25), 0 2px 4px rgba(29, 185, 84, 0.15);
+}
+
+.track-spotify-link:hover::before {
+  opacity: 0;
+  background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.1));
 }
 
 .track-spotify-link svg {

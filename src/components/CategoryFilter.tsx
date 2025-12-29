@@ -27,7 +27,7 @@ export const CategoryFilter = ({ categories, selectedCategory, onCategoryChange 
           onKeyDown={(e) => handleKeyDown(e, category.id)}
           tabIndex={selectedCategory === category.id ? 0 : -1}
         >
-          {category.name}
+          <span>{category.name}</span>
         </button>
       ))}
     </div>

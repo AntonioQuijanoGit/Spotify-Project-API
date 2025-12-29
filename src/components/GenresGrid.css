@@ -1,0 +1,51 @@
+.genres-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-xl);
+  position: relative;
+}
+
+.genre-grid-item {
+  animation-fill-mode: both;
+  position: relative;
+  animation: slideUpFade 0.5s var(--ease-out) both;
+}
+
+.genre-grid-item::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, transparent, var(--color-border-subtle), transparent);
+  opacity: 0;
+  transition: opacity var(--transition-slow) var(--ease-out);
+  pointer-events: none;
+  z-index: -1;
+  filter: blur(8px);
+}
+
+.genre-grid-item:hover::after {
+  opacity: 1;
+}
+
+@media (max-width: 1024px) {
+  .genres-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-lg);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .genres-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+  }
+}
+
+@media (max-width: 768px) {
+  .genres-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+}
+
