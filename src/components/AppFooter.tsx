@@ -6,7 +6,7 @@ export const AppFooter = () => {
       <div className="container">
         <div className="footer-content">
           <p className="footer-text">
-            Developed by <strong>Anton</strong> with React + TypeScript
+            Developed by <strong>Antonio Quijano</strong>
           </p>
           <a
             href="https://github.com/anton"
