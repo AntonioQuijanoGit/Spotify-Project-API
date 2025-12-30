@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, type ReactElement } from 'react';
+import { createPortal } from 'react-dom';
 import type { TabType } from './TabNavigation';
 import './MobileMenu.css';
 
@@ -170,7 +171,13 @@ export const MobileMenu = ({ activeTab, onTabChange }: MobileMenuProps) => {
     if (!isOpen) return;
 
     const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+      const target = event.target as Node;
+      if (menuRef.current && !menuRef.current.contains(target)) {
+        // Don't close if clicking on the overlay (it has its own handler)
+        const overlay = document.querySelector('.mobile-menu-overlay');
+        if (overlay && overlay.contains(target)) {
+          return;
+        }
         setIsOpen(false);
       }
     };
@@ -222,9 +229,9 @@ export const MobileMenu = ({ activeTab, onTabChange }: MobileMenuProps) => {
         </svg>
       </button>
 
-      {isOpen && (
+      {isOpen && createPortal(
         <>
-          <div className="mobile-menu-overlay" aria-hidden="true" />
+          <div className="mobile-menu-overlay" aria-hidden="true" onClick={() => setIsOpen(false)} />
           <nav
             ref={menuRef}
             className="mobile-menu"
@@ -257,7 +264,8 @@ export const MobileMenu = ({ activeTab, onTabChange }: MobileMenuProps) => {
               ))}
             </ul>
           </nav>
-        </>
+        </>,
+        document.body
       )}
     </>
   );

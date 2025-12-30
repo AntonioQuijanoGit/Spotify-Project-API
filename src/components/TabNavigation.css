@@ -7,6 +7,7 @@
   z-index: var(--z-sticky);
 }
 
+/* Mobile: Hide tab navigation when mobile menu is shown */
 @media (max-width: 1024px) {
   .tab-navigation {
     display: none;
@@ -93,9 +94,10 @@
   transform: scale(1.05);
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
+/* Tablet: Horizontal scroll for tabs */
+@media (min-width: 641px) and (max-width: 1024px) {
   .tab-navigation {
+    display: flex;
     overflow-x: auto;
     overflow-y: hidden;
     scrollbar-width: thin;
