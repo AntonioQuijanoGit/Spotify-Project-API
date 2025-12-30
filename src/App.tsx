@@ -282,7 +282,15 @@ function App() {
 
           {activeTab === 'playlists' && (
             <div className="playlists-container-wrapper slide-up">
-              <SpotifyPlaylists />
+              <Suspense fallback={
+                <div style={{ padding: 'var(--space-2xl)', display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
+                  <SkeletonLoader height="40px" width="200px" />
+                  <SkeletonLoader height="52px" />
+                  <SkeletonLoader height="200px" />
+                </div>
+              }>
+                <SpotifyPlaylists />
+              </Suspense>
             </div>
           )}
 

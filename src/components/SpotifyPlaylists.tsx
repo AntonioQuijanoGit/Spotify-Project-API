@@ -14,46 +14,103 @@ export const SpotifyPlaylists = () => {
   const [selectedGenre, setSelectedGenre] = useState<string>('featured');
   const { error: errorToast } = useToast();
 
-  useEffect(() => {
-    loadPlaylists();
-  }, [selectedGenre]);
+  // Safety check for playlist data
+  const safePlaylists = (playlists || []).filter(playlist => 
+    playlist && 
+    playlist.id && 
+    playlist.name &&
+    playlist.external_urls &&
+    playlist.external_urls.spotify
+  );
 
-  const loadPlaylists = async () => {
-    try {
-      setLoading(true);
-      setError(null);
+  useEffect(() => {
+    let isMounted = true;
+    let cancelled = false;
+
+    const loadPlaylists = async () => {
+      if (cancelled || !isMounted) return;
       
-      let fetchedPlaylists: SpotifyPlaylist[] = [];
-      
-      if (selectedGenre === 'featured') {
-        // Try featured, but fallback to popular search if it fails
-        try {
-          fetchedPlaylists = await getFeaturedPlaylists(20);
-        } catch {
-          // Fallback to searching popular playlists
-          fetchedPlaylists = await searchPlaylists('popular', 20);
+      try {
+        if (isMounted) {
+          setLoading(true);
+          setError(null);
         }
-      } else {
-        // Search playlists by genre
-        const genre = genres.find(g => g.id === selectedGenre);
-        if (genre) {
-          fetchedPlaylists = await searchPlaylists(genre.spotifyGenre, 20);
+        
+        let fetchedPlaylists: SpotifyPlaylist[] = [];
+        
+        if (selectedGenre === 'featured') {
+          // Use better search terms for featured playlists
+          if (!cancelled && isMounted) {
+            // Try multiple search terms to get good curated playlists
+            const searchTerms = [
+              'spotify curated',
+              'spotify official',
+              'today\'s top hits',
+              'viral hits',
+              'new music friday',
+              'discover weekly',
+              'release radar'
+            ];
+            for (const term of searchTerms) {
+              try {
+                fetchedPlaylists = await searchPlaylists(term, 20);
+                if (fetchedPlaylists && fetchedPlaylists.length > 0) {
+                  break; // Success, stop trying other terms
+                }
+              } catch {
+                continue; // Try next term
+              }
+            }
+            // If all searches failed, try featured endpoint as last resort
+            if (fetchedPlaylists.length === 0) {
+              try {
+                fetchedPlaylists = await getFeaturedPlaylists(20);
+              } catch {
+                // Ignore featured error, we'll show empty state
+              }
+            }
+          }
+        } else {
+          // Search playlists by genre
+          const genre = genres.find(g => g.id === selectedGenre);
+          if (genre && !cancelled && isMounted) {
+            fetchedPlaylists = await searchPlaylists(genre.name, 20);
+          }
+        }
+        
+        if (isMounted && !cancelled) {
+          // Ensure we have valid playlists
+          const validPlaylists = (fetchedPlaylists || []).filter(p => 
+            p && p.id && p.name && p.external_urls && p.external_urls.spotify
+          );
+          setPlaylists(validPlaylists);
+          setLoading(false);
+        }
+      } catch (err) {
+        if (isMounted && !cancelled) {
+          const errorMessage = err instanceof Error ? err.message : 'Failed to load playlists';
+          setError(errorMessage);
+          setPlaylists([]); // Clear playlists on error
+          setLoading(false);
+          if (import.meta.env.DEV) {
+            console.error('Error loading playlists:', err);
+          }
         }
       }
-      
-      setPlaylists(fetchedPlaylists);
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to load playlists';
-      setError(errorMessage);
-      errorToast(errorMessage);
-    } finally {
-      setLoading(false);
-    }
-  };
+    };
+
+    loadPlaylists();
+
+    return () => {
+      cancelled = true;
+      isMounted = false;
+    };
+  }, [selectedGenre]);
 
   const handleSearch = async () => {
     if (!searchQuery.trim()) {
-      loadPlaylists();
+      // Reload playlists for current genre
+      setSelectedGenre(prev => prev === 'featured' ? 'featured' : prev);
       return;
     }
 
@@ -61,10 +118,15 @@ export const SpotifyPlaylists = () => {
       setLoading(true);
       setError(null);
       const results = await searchPlaylists(searchQuery, 20);
-      setPlaylists(results);
+      // Filter valid playlists
+      const validResults = (results || []).filter(p => 
+        p && p.id && p.name && p.external_urls && p.external_urls.spotify
+      );
+      setPlaylists(validResults);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to search playlists';
       setError(errorMessage);
+      setPlaylists([]);
       errorToast(errorMessage);
     } finally {
       setLoading(false);
@@ -145,22 +207,30 @@ export const SpotifyPlaylists = () => {
       {error && (
         <div className="playlists-error">
           <p>Error: {error}</p>
-          <button onClick={loadPlaylists} className="retry-btn" type="button">
+          <button onClick={() => {
+            setError(null);
+            setSelectedGenre(prev => {
+              // Force re-render by toggling
+              return prev === 'featured' ? 'rock' : 'featured';
+            });
+            setTimeout(() => setSelectedGenre('featured'), 0);
+          }} className="retry-btn" type="button">
             Retry
           </button>
         </div>
       )}
 
-      {!loading && !error && playlists.length > 0 && (
+      {!loading && !error && safePlaylists.length > 0 && (
         <div className="playlists-grid">
-          {playlists.map((playlist) => (
+          {safePlaylists.map((playlist) => (
             <article key={playlist.id} className="playlist-card">
               <div className="playlist-cover">
-                {playlist.images[0] ? (
+                {playlist.images && playlist.images[0] ? (
                   <img
                     src={playlist.images[0].url}
                     alt={playlist.name}
                     loading="lazy"
+                    style={{ display: 'block' }}
                   />
                 ) : (
                   <div className="playlist-cover-placeholder">
@@ -170,7 +240,7 @@ export const SpotifyPlaylists = () => {
                   </div>
                 )}
                 <a
-                  href={playlist.external_urls.spotify}
+                  href={playlist.external_urls?.spotify || '#'}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="playlist-overlay"
@@ -182,14 +252,14 @@ export const SpotifyPlaylists = () => {
                 </a>
               </div>
               <div className="playlist-info">
-                <h3 className="playlist-name">{playlist.name}</h3>
-                <p className="playlist-owner">{playlist.owner.display_name}</p>
+                <h3 className="playlist-name">{playlist.name || 'Untitled Playlist'}</h3>
+                <p className="playlist-owner">{playlist.owner?.display_name || 'Unknown'}</p>
                 {playlist.description && (
                   <p className="playlist-description">{playlist.description.substring(0, 100)}...</p>
                 )}
-                <p className="playlist-tracks">{playlist.tracks.total} tracks</p>
+                <p className="playlist-tracks">{playlist.tracks?.total || 0} tracks</p>
                 <a
-                  href={playlist.external_urls.spotify}
+                  href={playlist.external_urls?.spotify || '#'}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="playlist-link"
@@ -202,7 +272,7 @@ export const SpotifyPlaylists = () => {
         </div>
       )}
 
-      {!loading && !error && playlists.length === 0 && (
+      {!loading && !error && safePlaylists.length === 0 && (
         <div className="playlists-empty">
           <p>No playlists found. Try a different search or genre.</p>
         </div>

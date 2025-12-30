@@ -367,8 +367,9 @@ export async function searchPlaylists(query: string, limit: number = 20): Promis
 export async function getFeaturedPlaylists(limit: number = 20): Promise<SpotifyPlaylist[]> {
   const token = await getSpotifyToken();
 
+  // Add country and locale parameters for better compatibility
   const response = await fetch(
-    `https://api.spotify.com/v1/browse/featured-playlists?limit=${limit}`,
+    `https://api.spotify.com/v1/browse/featured-playlists?limit=${limit}&country=US&locale=en_US`,
     {
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -377,11 +378,20 @@ export async function getFeaturedPlaylists(limit: number = 20): Promise<SpotifyP
   );
 
   if (!response.ok) {
-    throw new Error('Failed to get featured playlists');
+    const errorData = await response.json().catch(() => ({}));
+    const errorMessage = errorData.error?.message || 'Failed to get featured playlists';
+    throw new Error(errorMessage);
   }
 
   const data = await response.json();
-  return data.playlists.items || [];
+  
+  // Handle different response structures
+  if (data.playlists && data.playlists.items) {
+    return data.playlists.items;
+  }
+  
+  // Fallback: if structure is different, return empty array
+  return [];
 }
 
 /**
