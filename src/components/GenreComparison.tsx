@@ -28,8 +28,10 @@ export const GenreComparison = ({ onClose }: GenreComparisonProps) => {
   };
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-container comparison-modal" onClick={(e) => e.stopPropagation()}>
+    <>
+      <div className="modal-overlay" onClick={onClose} aria-hidden="true" />
+      <div className="modal-container" role="dialog" aria-modal="true">
+        <div className="comparison-modal" onClick={(e) => e.stopPropagation()}>
         <button className="modal-close" onClick={onClose} aria-label="Close comparison">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <line x1="18" y1="6" x2="6" y2="18" />
@@ -91,7 +93,7 @@ export const GenreComparison = ({ onClose }: GenreComparisonProps) => {
             <div className="available-genres">
               <h3>Available Genres</h3>
               <div className="available-genres-grid">
-                {availableGenres.slice(0, 6).map((genre) => (
+                {availableGenres.map((genre) => (
                   <button
                     key={genre.id}
                     onClick={() => handleAddGenre(genre)}
@@ -152,8 +154,9 @@ export const GenreComparison = ({ onClose }: GenreComparisonProps) => {
             </div>
           )}
         </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

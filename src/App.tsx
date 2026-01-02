@@ -1,6 +1,7 @@
 import { useState, useMemo, lazy, Suspense, useEffect } from 'react';
 import { AppHeader } from './components/AppHeader';
 import { AppFooter } from './components/AppFooter';
+import { WelcomeScreen } from './components/WelcomeScreen';
 import { TabNavigation, type TabType } from './components/TabNavigation';
 import { FiltersSection } from './components/FiltersSection';
 import { GenresGrid } from './components/GenresGrid';
@@ -122,6 +123,8 @@ function App() {
 
   return (
     <div className="app">
+      <WelcomeScreen />
+      
       {/* Skip to main content link for accessibility */}
       <a href="#main-content" className="skip-link">
         Skip to main content

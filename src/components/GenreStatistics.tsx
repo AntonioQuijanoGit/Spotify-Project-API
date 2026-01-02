@@ -59,7 +59,8 @@ export const GenreStatistics = () => {
         {/* Category Distribution */}
         <div className="stat-card">
           <h3>Genres by Category</h3>
-          <ResponsiveContainer width="100%" height={300}>
+          <div className="chart-container">
+          <ResponsiveContainer width="100%" height={350}>
             <BarChart data={categoryData}>
               <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
               <XAxis dataKey="name" tick={{ fill: 'var(--color-text-secondary)', fontSize: 12 }} />
@@ -74,13 +75,15 @@ export const GenreStatistics = () => {
               <Bar dataKey="value" fill="var(--color-accent)" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
+          </div>
         </div>
 
         {/* Favorite Categories */}
         {favoriteGenres.length > 0 && (
           <div className="stat-card">
             <h3>Your Favorite Categories</h3>
-            <ResponsiveContainer width="100%" height={300}>
+            <div className="chart-container">
+            <ResponsiveContainer width="100%" height={350}>
               <PieChart>
                 <Pie
                   data={favoriteCategoryData}
@@ -99,13 +102,15 @@ export const GenreStatistics = () => {
                 <Tooltip />
               </PieChart>
             </ResponsiveContainer>
+            </div>
           </div>
         )}
 
         {/* Top Characteristics */}
         <div className="stat-card">
           <h3>Most Common Characteristics</h3>
-          <ResponsiveContainer width="100%" height={300}>
+          <div className="chart-container">
+          <ResponsiveContainer width="100%" height={350}>
             <BarChart data={characteristicsData} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
               <XAxis type="number" tick={{ fill: 'var(--color-text-secondary)', fontSize: 12 }} />
@@ -120,6 +125,7 @@ export const GenreStatistics = () => {
               <Bar dataKey="value" fill="var(--color-accent)" radius={[0, 4, 4, 0]} />
             </BarChart>
           </ResponsiveContainer>
+          </div>
         </div>
 
         {/* Summary Stats */}

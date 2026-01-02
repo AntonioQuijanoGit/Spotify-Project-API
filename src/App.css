@@ -40,6 +40,8 @@
 .app-main {
   flex: 1;
   padding: var(--space-3xl) 0;
+  position: relative;
+  z-index: 1;
 }
 
 /* Results Info */
@@ -220,6 +222,14 @@
 
 .statistics-container {
   animation: fadeInUp 0.4s var(--ease-out) both;
+}
+
+.playlists-container-wrapper {
+  position: relative;
+  z-index: 10;
+  min-height: 100%;
+  background: var(--color-bg);
+  isolation: isolate;
 }
 
 @media (max-width: 640px) {
