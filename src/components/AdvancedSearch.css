@@ -175,6 +175,35 @@
   object-fit: cover;
 }
 
+.artist-image-placeholder,
+.album-image-placeholder {
+  width: 100%;
+  aspect-ratio: 1;
+  background: linear-gradient(135deg, var(--color-border-subtle) 0%, var(--color-border) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-tertiary);
+  position: relative;
+}
+
+.artist-image-placeholder svg,
+.album-image-placeholder svg {
+  opacity: 0.3;
+  margin-bottom: var(--space-xs);
+  color: var(--color-text-tertiary);
+}
+
+.artist-image-placeholder span,
+.album-image-placeholder span {
+  position: absolute;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  opacity: 0.5;
+}
+
 .artist-info,
 .album-info {
   padding: var(--space-md);

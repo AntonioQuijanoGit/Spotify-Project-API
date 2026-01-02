@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { BarChart3, Target, Music, TrendingUp } from 'lucide-react';
 import { genres } from '../data/genres';
 import { useFavorites } from '../hooks/useFavorites';
 import './GenreStatistics.css';
@@ -48,10 +49,22 @@ export const GenreStatistics = () => {
         <h2>Genre Statistics</h2>
         <p>Visual insights into music genres and your preferences</p>
         <div className="statistics-explanation">
-          <p>📊 <strong>Genres by Category:</strong> Shows how many genres exist in each category (Rock, Electronic, Hip-Hop, etc.)</p>
-          <p>🎯 <strong>Your Favorite Categories:</strong> Distribution of your favorite genres by category (only shown if you have favorites)</p>
-          <p>🎵 <strong>Most Common Characteristics:</strong> The most frequent musical characteristics across all genres</p>
-          <p>📈 <strong>Summary:</strong> Quick stats about total genres, categories, and your favorites</p>
+          <p>
+            <BarChart3 size={18} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '8px' }} />
+            <strong>Genres by Category:</strong> Shows how many genres exist in each category (Rock, Electronic, Hip-Hop, etc.)
+          </p>
+          <p>
+            <Target size={18} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '8px' }} />
+            <strong>Your Favorite Categories:</strong> Distribution of your favorite genres by category (only shown if you have favorites)
+          </p>
+          <p>
+            <Music size={18} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '8px' }} />
+            <strong>Most Common Characteristics:</strong> The most frequent musical characteristics across all genres
+          </p>
+          <p>
+            <TrendingUp size={18} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '8px' }} />
+            <strong>Summary:</strong> Quick stats about total genres, categories, and your favorites
+          </p>
         </div>
       </div>
 

@@ -1,98 +1,102 @@
 import { useState, useEffect } from 'react';
-import { Music, Search, Heart, Radio, X, ArrowRight } from 'lucide-react';
+import { Music, Search, Heart, ArrowRight } from 'lucide-react';
 import './WelcomeScreen.css';
 
 export function WelcomeScreen() {
   const [showWelcome, setShowWelcome] = useState(true);
+  const [isHiding, setIsHiding] = useState(false);
 
+  // Prevenir scroll cuando el WelcomeScreen está visible
   useEffect(() => {
-    const hasSeenWelcome = localStorage.getItem('spotify-welcome-seen');
-    if (hasSeenWelcome === 'true') {
-      setShowWelcome(false);
+    if (showWelcome && !isHiding) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
     }
-  }, []);
 
-  const closeWelcome = () => {
-    setShowWelcome(false);
-    localStorage.setItem('spotify-welcome-seen', 'true');
-  };
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [showWelcome, isHiding]);
 
   const getStarted = () => {
-    closeWelcome();
+    if (import.meta.env.DEV) {
+      console.log('Get Started clicked');
+    }
+    
+    // Iniciar animación de ocultar
+    setIsHiding(true);
+    
+    // Restaurar scroll y ocultar después de la animación
     setTimeout(() => {
-      const mainContent = document.querySelector('main');
-      if (mainContent) {
-        mainContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.body.style.overflow = '';
+      setShowWelcome(false);
+      if (import.meta.env.DEV) {
+        console.log('WelcomeScreen hidden, showWelcome:', false);
       }
-    }, 300);
+    }, 500);
   };
 
-  if (!showWelcome) return null;
+  if (!showWelcome) {
+    if (import.meta.env.DEV) {
+      console.log('WelcomeScreen: not showing because showWelcome is false');
+    }
+    return null;
+  }
+
+  if (import.meta.env.DEV) {
+    console.log('WelcomeScreen: rendering with showWelcome:', showWelcome, 'isHiding:', isHiding);
+  }
 
   return (
-    <div className="welcome-overlay" onClick={closeWelcome}>
-      <div className="welcome-container spotify-welcome" onClick={(e) => e.stopPropagation()}>
-        {/* Background decorative elements */}
-        <div className="welcome-bg spotify-bg">
-          <div className="sound-wave wave-1"></div>
-          <div className="sound-wave wave-2"></div>
-          <div className="sound-wave wave-3"></div>
-        </div>
-
-        {/* Close button */}
-        <button className="welcome-close" onClick={closeWelcome} aria-label="Close welcome screen">
-          <X size={20} strokeWidth={2} />
-        </button>
-
+    <div 
+      className={`welcome-hero ${isHiding ? 'hiding' : ''}`} 
+      style={{ 
+        display: 'flex',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        zIndex: 10001,
+        backgroundColor: '#ffffff'
+      }}
+    >
+      <div className="welcome-hero-content">
+        {/* Background gradient */}
+        <div className="hero-bg-gradient"></div>
+        
         {/* Content */}
-        <div className="welcome-content">
-          <div className="welcome-icon-wrapper spotify-icon-wrapper">
-            <div className="spotify-logo-large">♪</div>
-            <div className="spotify-glow"></div>
+        <div className="hero-content">
+          <div className="hero-icon">
+            <Music size={64} strokeWidth={1.5} />
           </div>
 
-          <h1 className="welcome-title">Spotify Music Explorer</h1>
+          <h1 className="hero-title">Discover What Moves You</h1>
           
-          <p className="welcome-description">
-            Discover music with Spotify API integration. Explore genres, browse playlists, 
-            and find new artists with secure OAuth authentication and real-time search capabilities.
+          <p className="hero-description">
+            Explore genres, discover artists, and create playlists. 
+            Everything you need to navigate the world of sound.
           </p>
 
-          <div className="welcome-features">
-            <div className="welcome-feature spotify-feature">
-              <div className="feature-icon-wrapper spotify-icon">
-                <Search size={20} strokeWidth={2} />
-              </div>
-              <div className="feature-content">
-                <h3 className="feature-title">Real-time Search</h3>
-                <p className="feature-desc">Instant search results with debouncing for optimal performance</p>
-              </div>
+          <div className="hero-features">
+            <div className="hero-feature">
+              <Search size={24} strokeWidth={2} />
+              <span>Search & Discover</span>
             </div>
-
-            <div className="welcome-feature spotify-feature">
-              <div className="feature-icon-wrapper spotify-icon">
-                <Music size={20} strokeWidth={2} />
-              </div>
-              <div className="feature-content">
-                <h3 className="feature-title">Genre Exploration</h3>
-                <p className="feature-desc">Browse and discover music genres with detailed information</p>
-              </div>
+            <div className="hero-feature">
+              <Music size={24} strokeWidth={2} />
+              <span>Genre Exploration</span>
             </div>
-
-            <div className="welcome-feature spotify-feature">
-              <div className="feature-icon-wrapper spotify-icon">
-                <Heart size={20} strokeWidth={2} />
-              </div>
-              <div className="feature-content">
-                <h3 className="feature-title">OAuth Authentication</h3>
-                <p className="feature-desc">Secure OAuth 2.0 login with automatic token refresh</p>
-              </div>
+            <div className="hero-feature">
+              <Heart size={24} strokeWidth={2} />
+              <span>Curated Playlists</span>
             </div>
           </div>
 
-          <button className="welcome-button spotify-button" onClick={getStarted}>
-            Start Exploring
-            <ArrowRight size={18} strokeWidth={2} />
+          <button className="hero-button" onClick={getStarted}>
+            Get Started
+            <ArrowRight size={20} strokeWidth={2} />
           </button>
         </div>
       </div>

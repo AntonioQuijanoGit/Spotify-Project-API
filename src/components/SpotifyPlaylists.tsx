@@ -252,20 +252,36 @@ export const SpotifyPlaylists = () => {
                 </a>
               </div>
               <div className="playlist-info">
-                <h3 className="playlist-name">{playlist.name || 'Untitled Playlist'}</h3>
-                <p className="playlist-owner">{playlist.owner?.display_name || 'Unknown'}</p>
+                <div className="playlist-header-info">
+                  <h3 className="playlist-name">{playlist.name || 'Untitled Playlist'}</h3>
+                  <p className="playlist-owner">{playlist.owner?.display_name || 'Unknown'}</p>
+                </div>
+                
                 {playlist.description && (
-                  <p className="playlist-description">{playlist.description.substring(0, 100)}...</p>
+                  <div className="playlist-description-wrapper">
+                    <p className="playlist-description">
+                      {playlist.description
+                        .replace(/<[^>]*>/g, '') // Remove HTML tags
+                        .replace(/https?:\/\/[^\s]+/g, '') // Remove URLs
+                        .replace(/\s+/g, ' ') // Clean multiple spaces
+                        .trim()
+                        .substring(0, 120)}
+                      {playlist.description.length > 120 ? '...' : ''}
+                    </p>
+                  </div>
                 )}
-                <p className="playlist-tracks">{playlist.tracks?.total || 0} tracks</p>
-                <a
-                  href={playlist.external_urls?.spotify || '#'}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="playlist-link"
-                >
-                  Open in Spotify
-                </a>
+                
+                <div className="playlist-footer-info">
+                  <p className="playlist-tracks">{playlist.tracks?.total || 0} tracks</p>
+                  <a
+                    href={playlist.external_urls?.spotify || '#'}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="playlist-link"
+                  >
+                    Open in Spotify
+                  </a>
+                </div>
               </div>
             </article>
           ))}

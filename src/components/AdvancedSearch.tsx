@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { User, Disc } from 'lucide-react';
 import { searchArtists, searchAlbums, getArtistTopTracks, getAlbumTracks } from '../utils/spotify';
 import type { SpotifyArtist, SpotifyAlbum, SpotifyTrack } from '../types';
 import { TrackList } from './TrackList';
@@ -135,12 +136,17 @@ export const AdvancedSearch = () => {
                 className={`artist-card ${selectedArtist?.id === artist.id ? 'selected' : ''}`}
                 type="button"
               >
-                {artist.images[0] && (
+                {artist.images[0] ? (
                   <img
                     src={artist.images[0].url}
                     alt={artist.name}
                     className="artist-image"
                   />
+                ) : (
+                  <div className="artist-image-placeholder">
+                    <User size={48} />
+                    <span>{artist.name.charAt(0).toUpperCase()}</span>
+                  </div>
                 )}
                 <div className="artist-info">
                   <h4>{artist.name}</h4>
@@ -163,12 +169,17 @@ export const AdvancedSearch = () => {
                 className={`album-card ${selectedAlbum?.id === album.id ? 'selected' : ''}`}
                 type="button"
               >
-                {album.images[0] && (
+                {album.images[0] ? (
                   <img
                     src={album.images[0].url}
                     alt={album.name}
                     className="album-image"
                   />
+                ) : (
+                  <div className="album-image-placeholder">
+                    <Disc size={48} />
+                    <span>{album.name.charAt(0).toUpperCase()}</span>
+                  </div>
                 )}
                 <div className="album-info">
                   <h4>{album.name}</h4>
