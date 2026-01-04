@@ -11,7 +11,7 @@ interface TutorialStep {
 const tutorialSteps: TutorialStep[] = [
   {
     title: 'Welcome',
-    description: 'Explore 30+ music genres, discover new artists, and listen to previews from Spotify.',
+    description: 'Explore 30+ music genres, discover new artists, and listen to previews.',
   },
   {
     title: 'Browse & Search',
@@ -22,8 +22,8 @@ const tutorialSteps: TutorialStep[] = [
     description: 'Play 30-second previews and save your favorite genres with the heart icon.',
   },
   {
-    title: 'Spotify Integration',
-    description: 'This app uses the Spotify Web API to fetch real-time music data. All tracks, artists, and album information comes directly from Spotify.',
+    title: 'Music Integration',
+    description: 'This app uses real-time music data. All tracks, artists, and album information is fetched from our music database.',
   },
   {
     title: 'Discover More',

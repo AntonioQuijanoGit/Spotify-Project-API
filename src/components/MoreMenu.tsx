@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { MoreHorizontal, Sparkles, Clock, Star, TrendingUp, Focus, Smile, History, GitCompare } from 'lucide-react';
+import { MoreHorizontal, Sparkles, Clock, Star, TrendingUp, Smile, History, BookOpen } from 'lucide-react';
 import type { TabType } from './TabNavigation';
 import './MoreMenu.css';
 
@@ -39,12 +39,6 @@ export const MoreMenu = ({ onTabChange, activeTab }: MoreMenuProps) => {
       icon: <TrendingUp size={18} strokeWidth={2} />
     },
     { 
-      id: 'focus', 
-      label: 'Focus Mode', 
-      description: 'Curated music for deep work, study, and concentration',
-      icon: <Focus size={18} strokeWidth={2} />
-    },
-    { 
       id: 'mood', 
       label: 'Mood Search', 
       description: 'Find music that matches your current mood or activity',
@@ -57,10 +51,10 @@ export const MoreMenu = ({ onTabChange, activeTab }: MoreMenuProps) => {
       icon: <History size={18} strokeWidth={2} />
     },
     { 
-      id: 'track-compare', 
-      label: 'Track Comparison', 
-      description: 'Compare audio features of multiple tracks side by side',
-      icon: <GitCompare size={18} strokeWidth={2} />
+      id: 'learning', 
+      label: 'Learning Mode', 
+      description: 'Learn about music genres through interactive tutorials and quizzes',
+      icon: <BookOpen size={18} strokeWidth={2} />
     },
   ];
 

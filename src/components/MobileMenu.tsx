@@ -115,16 +115,6 @@ const allTabs: Array<{ id: TabType; label: string; icon: ReactElement }> = [
     ),
   },
   {
-    id: 'focus',
-    label: 'Focus Mode',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <circle cx="12" cy="12" r="10" />
-        <circle cx="12" cy="12" r="3" />
-      </svg>
-    ),
-  },
-  {
     id: 'mood',
     label: 'Mood Search',
     icon: (
@@ -147,16 +137,12 @@ const allTabs: Array<{ id: TabType; label: string; icon: ReactElement }> = [
     ),
   },
   {
-    id: 'track-compare',
-    label: 'Track Compare',
+    id: 'learning',
+    label: 'Learning',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <line x1="8" y1="6" x2="21" y2="6" />
-        <line x1="8" y1="12" x2="21" y2="12" />
-        <line x1="8" y1="18" x2="21" y2="18" />
-        <line x1="3" y1="6" x2="3.01" y2="6" />
-        <line x1="3" y1="12" x2="3.01" y2="12" />
-        <line x1="3" y1="18" x2="3.01" y2="18" />
+        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
       </svg>
     ),
   },

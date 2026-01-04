@@ -8,8 +8,25 @@
 .genre-grid-item {
   animation-fill-mode: both;
   position: relative;
-  animation: slideUpFade 0.5s var(--ease-out) both;
+  animation: slideUpFade 0.6s var(--ease-out) both;
+  opacity: 0;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
+
+.genre-grid-item:nth-child(1) { animation-delay: 0.05s; }
+.genre-grid-item:nth-child(2) { animation-delay: 0.1s; }
+.genre-grid-item:nth-child(3) { animation-delay: 0.15s; }
+.genre-grid-item:nth-child(4) { animation-delay: 0.2s; }
+.genre-grid-item:nth-child(5) { animation-delay: 0.25s; }
+.genre-grid-item:nth-child(6) { animation-delay: 0.3s; }
+.genre-grid-item:nth-child(7) { animation-delay: 0.35s; }
+.genre-grid-item:nth-child(8) { animation-delay: 0.4s; }
+.genre-grid-item:nth-child(9) { animation-delay: 0.45s; }
+.genre-grid-item:nth-child(10) { animation-delay: 0.5s; }
+.genre-grid-item:nth-child(11) { animation-delay: 0.55s; }
+.genre-grid-item:nth-child(12) { animation-delay: 0.6s; }
 
 .genre-grid-item::after {
   content: '';

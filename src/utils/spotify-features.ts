@@ -28,7 +28,11 @@ export async function getTrackAudioFeatures(trackId: string): Promise<AudioFeatu
  * Get audio features for multiple tracks (max 100)
  */
 export async function getTracksAudioFeatures(trackIds: string[]): Promise<AudioFeatures[]> {
-  if (trackIds.length === 0) return [];
+  if (trackIds.length === 0) {
+    console.log('getTracksAudioFeatures: No track IDs provided');
+    return [];
+  }
+  
   if (trackIds.length > 100) {
     // Batch requests if more than 100
     const batches = [];
@@ -39,23 +43,40 @@ export async function getTracksAudioFeatures(trackIds: string[]): Promise<AudioF
     return results.flat();
   }
 
-  const token = await getSpotifyToken();
+  try {
+    const token = await getSpotifyToken();
+    console.log('Fetching audio features for tracks:', trackIds);
 
-  const response = await fetch(
-    `https://api.spotify.com/v1/audio-features?ids=${trackIds.join(',')}`,
-    {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-      },
+    const response = await fetch(
+      `https://api.spotify.com/v1/audio-features?ids=${trackIds.join(',')}`,
+      {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Spotify API error:', response.status, response.statusText, errorText);
+      throw new Error(`Spotify API error: ${response.status} ${response.statusText}`);
     }
-  );
 
-  if (!response.ok) {
-    return [];
+    const data = await response.json();
+    console.log('Spotify API response:', data);
+    
+    if (!data.audio_features) {
+      console.error('No audio_features in response:', data);
+      return [];
+    }
+    
+    const features = data.audio_features.filter((f: AudioFeatures | null) => f !== null) as AudioFeatures[];
+    console.log('Filtered features:', features);
+    return features;
+  } catch (error) {
+    console.error('Error in getTracksAudioFeatures:', error);
+    throw error;
   }
-
-  const data = await response.json();
-  return data.audio_features.filter((f: AudioFeatures | null) => f !== null);
 }
 
 /**

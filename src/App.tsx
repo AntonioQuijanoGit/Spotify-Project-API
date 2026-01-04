@@ -21,10 +21,9 @@ import { GenreTimeline } from './components/GenreTimeline';
 import { DiscoveryMode } from './components/DiscoveryMode';
 import { PopularityComparison } from './components/PopularityComparison';
 import { SpotifyPlaylists } from './components/SpotifyPlaylists';
-import { FocusMode } from './components/FocusMode';
 import { MoodSearch } from './components/MoodSearch';
 import { ListeningHistory } from './components/ListeningHistory';
-import { TrackComparison } from './components/TrackComparison';
+import { LearningMode } from './components/LearningMode';
 import { useSearchHistory } from './hooks/useSearchHistory';
 import { useToast } from './hooks/useToast';
 import { useOffline } from './hooks/useOffline';
@@ -297,12 +296,6 @@ function App() {
             </div>
           )}
 
-          {activeTab === 'focus' && (
-            <div className="focus-container-wrapper slide-up">
-              <FocusMode />
-            </div>
-          )}
-
           {activeTab === 'mood' && (
             <div className="mood-container-wrapper slide-up">
               <MoodSearch />
@@ -315,11 +308,12 @@ function App() {
             </div>
           )}
 
-          {activeTab === 'track-compare' && (
-            <div className="track-compare-container-wrapper slide-up">
-              <TrackComparison />
+          {activeTab === 'learning' && (
+            <div className="learning-container-wrapper slide-up">
+              <LearningMode />
             </div>
           )}
+
         </div>
       </main>
 

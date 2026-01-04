@@ -186,7 +186,7 @@ export const GenreDetail = ({
               </section>
             )}
 
-            {/* Sample Tracks - Real Spotify Integration */}
+            {/* Sample Tracks */}
             <section className="detail-section">
               <h3 className="section-heading">Sample Tracks</h3>
               <TrackList tracks={tracks} loading={loading} error={error} />

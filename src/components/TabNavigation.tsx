@@ -1,7 +1,7 @@
 import { MoreMenu } from './MoreMenu';
 import './TabNavigation.css';
 
-export type TabType = 'genres' | 'search' | 'statistics' | 'comparison' | 'radio' | 'recommendations' | 'timeline' | 'discovery' | 'popularity' | 'playlists' | 'focus' | 'mood' | 'history' | 'track-compare';
+export type TabType = 'genres' | 'search' | 'statistics' | 'comparison' | 'radio' | 'recommendations' | 'timeline' | 'discovery' | 'popularity' | 'playlists' | 'mood' | 'history' | 'learning';
 
 interface TabNavigationProps {
   activeTab: TabType;

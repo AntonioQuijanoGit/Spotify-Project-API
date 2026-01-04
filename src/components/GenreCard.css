@@ -11,9 +11,16 @@
   height: 100%;
   box-shadow: var(--shadow-sm);
   outline: none;
-  will-change: transform, box-shadow;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  will-change: transform, box-shadow, filter;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.dark-mode .genre-card {
+  background: rgba(26, 26, 26, 0.95);
 }
 
 .genre-card::before {
@@ -42,10 +49,32 @@
 }
 
 .genre-card:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: var(--shadow-xl), var(--glow-lg);
+  transform: translateY(-8px) scale(1.02) translateZ(0);
+  box-shadow: 
+    0 20px 40px -10px rgba(0, 0, 0, 0.15),
+    0 0 30px rgba(0, 0, 0, 0.1),
+    var(--glow-lg);
   border-color: var(--color-border-hover);
   background: var(--color-surface-elevated);
+  filter: brightness(1.02);
+}
+
+.genre-card:hover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent, rgba(236, 72, 153, 0.03), transparent);
+  pointer-events: none;
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) translateY(-100%);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%);
+  }
 }
 
 .genre-card:active {
@@ -64,14 +93,17 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 3px;
+  height: 4px;
   transition: height var(--transition-base), opacity var(--transition-base);
-  opacity: 0.9;
+  opacity: 1;
+  box-shadow: 0 2px 8px currentColor;
+  z-index: 2;
 }
 
 .genre-card:hover .genre-card-accent {
-  height: 4px;
+  height: 5px;
   opacity: 1;
+  box-shadow: 0 4px 12px currentColor;
 }
 
 .genre-card-content {
@@ -246,7 +278,7 @@
   align-items: center;
   gap: var(--space-xs);
   padding: var(--space-sm) var(--space-lg);
-  background: var(--color-accent-gradient);
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
   color: var(--color-bg);
   font-size: var(--text-sm);
   font-weight: 500;
@@ -257,7 +289,9 @@
   justify-content: center;
   position: relative;
   overflow: hidden;
-  box-shadow: var(--shadow-xs);
+  box-shadow: 
+    var(--shadow-xs),
+    0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 .genre-card-button::before {
@@ -295,10 +329,13 @@
 }
 
 .genre-card-button:hover {
-  background: var(--color-accent-gradient);
-  opacity: 0.9;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+  opacity: 1;
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md), var(--glow-sm);
+  box-shadow: 
+    var(--shadow-md), 
+    var(--glow-sm),
+    0 0 30px rgba(236, 72, 153, 0.2);
 }
 
 .genre-card-button:active {

@@ -1,5 +1,6 @@
 import { ThemeToggle } from './ThemeToggle';
 import { MobileMenu } from './MobileMenu';
+import { Music } from 'lucide-react';
 import type { TabType } from './TabNavigation';
 import './AppHeader.css';
 
@@ -19,10 +20,26 @@ export const AppHeader = ({ activeTab, onTabChange }: AppHeaderProps) => {
             </div>
           )}
           <div className="header-text">
-            <h1 className="app-title">Music Genre Explorer</h1>
-            <p className="app-subtitle">
-              Discover and explore the rich diversity of musical genres
-            </p>
+            <div className="title-wrapper">
+              <div className="title-icon-wrapper">
+                <div className="title-icon">
+                  <Music size={36} strokeWidth={2} />
+                </div>
+                <div className="icon-glow"></div>
+              </div>
+              <div className="title-content">
+                <h1 className="app-title">
+                  <span className="title-main">Music Genre</span>
+                  <span className="title-accent">Explorer</span>
+                </h1>
+                <div className="title-decoration"></div>
+              </div>
+            </div>
+            <div className="subtitle-wrapper">
+              <p className="app-subtitle">
+                Discover and explore the rich diversity of musical genres
+              </p>
+            </div>
           </div>
           <div className="header-actions">
             <ThemeToggle />

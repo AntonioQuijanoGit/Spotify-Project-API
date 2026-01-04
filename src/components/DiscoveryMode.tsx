@@ -61,7 +61,7 @@ export const DiscoveryMode = ({
         </p>
         <div className="discovery-explanation">
           <p>🎲 <strong>How it works:</strong> Shows 6 random genres that you haven't favorited yet. Click "Generate New Discoveries" to get a fresh selection.</p>
-          <p>🎵 <strong>About the tracks:</strong> When you click on a genre, the tracks shown are real recommendations from Spotify's API based on that specific genre - not random!</p>
+          <p>🎵 <strong>About the tracks:</strong> When you click on a genre, the tracks shown are real recommendations based on that specific genre - not random!</p>
         </div>
         {lastDiscoveryDate !== today && (
           <button onClick={handleNewDiscovery} className="discovery-generate-btn">
