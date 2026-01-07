@@ -9,13 +9,45 @@ export function WelcomeScreen() {
   // Prevenir scroll cuando el WelcomeScreen está visible
   useEffect(() => {
     if (showWelcome && !isHiding) {
+      // Guardar la posición del scroll actual
+      const scrollY = window.scrollY;
+      
+      // Bloquear scroll en body y html
       document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.height = '100%';
+      document.documentElement.style.overflow = 'hidden';
+      
+      // Agregar clase al body para ocultar contenido
+      document.body.classList.add('welcome-screen-active');
     } else {
+      // Restaurar scroll
+      const scrollY = document.body.style.top;
       document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.height = '';
+      document.documentElement.style.overflow = '';
+      document.body.classList.remove('welcome-screen-active');
+      
+      // Restaurar posición del scroll
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
     }
 
     return () => {
+      // Limpiar al desmontar
       document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.height = '';
+      document.documentElement.style.overflow = '';
+      document.body.classList.remove('welcome-screen-active');
     };
   }, [showWelcome, isHiding]);
 
