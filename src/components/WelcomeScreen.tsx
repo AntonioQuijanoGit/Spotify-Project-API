@@ -82,26 +82,19 @@ export function WelcomeScreen() {
 
   return (
     <div 
-      className={`welcome-hero ${isHiding ? 'hiding' : ''}`} 
-      style={{ 
-        display: 'flex',
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        zIndex: 10001,
-        backgroundColor: '#ffffff'
-      }}
+      className={`welcome-hero ${isHiding ? 'hiding' : ''}`}
     >
-      <div className="welcome-hero-content">
-        {/* Background gradient */}
+      <div className="welcome-hero-background">
         <div className="hero-bg-gradient"></div>
-        
-        {/* Content */}
+        <div className="hero-bg-pattern"></div>
+      </div>
+      
+      <div className="welcome-hero-content">
         <div className="hero-content">
-          <div className="hero-icon">
-            <Music size={64} strokeWidth={1.5} />
+          <div className="hero-icon-wrapper">
+            <div className="hero-icon">
+              <Music size={48} strokeWidth={2} />
+            </div>
           </div>
 
           <h1 className="hero-title">Discover What Moves You</h1>
@@ -113,25 +106,30 @@ export function WelcomeScreen() {
 
           <div className="hero-features">
             <div className="hero-feature">
-              <Search size={24} strokeWidth={2} />
+              <div className="hero-feature-icon">
+                <Search size={20} strokeWidth={2.5} />
+              </div>
               <span>Search & Discover</span>
             </div>
             <div className="hero-feature">
-              <Music size={24} strokeWidth={2} />
+              <div className="hero-feature-icon">
+                <Music size={20} strokeWidth={2.5} />
+              </div>
               <span>Genre Exploration</span>
             </div>
             <div className="hero-feature">
-              <Heart size={24} strokeWidth={2} />
+              <div className="hero-feature-icon">
+                <Heart size={20} strokeWidth={2.5} />
+              </div>
               <span>Curated Playlists</span>
             </div>
           </div>
         </div>
       </div>
       
-      {/* Button outside scrollable content */}
       <button className="hero-button" onClick={getStarted}>
-        Get Started
-        <ArrowRight size={20} strokeWidth={2} />
+        <span>Get Started</span>
+        <ArrowRight size={18} strokeWidth={2.5} />
       </button>
     </div>
   );
