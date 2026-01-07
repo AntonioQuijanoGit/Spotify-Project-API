@@ -36,3 +36,4 @@ export const FavoritesFilterButton = ({ isActive, onClick }: FavoritesFilterButt
 
 
 
+

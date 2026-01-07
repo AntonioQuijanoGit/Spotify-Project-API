@@ -356,6 +356,7 @@
 @media (max-width: 768px) {
   .genre-card-content {
     padding: var(--space-lg);
+    gap: var(--space-md);
   }
   
   .genre-card-title {
@@ -374,6 +375,45 @@
   
   .genre-card-button {
     min-height: 44px;
+  }
+  
+  .genre-card-header {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .genre-card-content {
+    padding: var(--space-md);
+    gap: var(--space-sm);
+  }
+  
+  .genre-card-title {
+    font-size: var(--text-xl);
+  }
+  
+  .genre-card-description {
+    font-size: var(--text-xs);
+    -webkit-line-clamp: 2;
+  }
+  
+  .genre-card-footer {
+    padding: 0 var(--space-md) var(--space-md);
+  }
+  
+  .genre-card-button {
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--text-xs);
+  }
+  
+  .characteristic-badge {
+    font-size: 10px;
+    padding: 2px var(--space-xs);
+  }
+  
+  .genre-card-category,
+  .genre-card-year {
+    font-size: 10px;
   }
 }
 

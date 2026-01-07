@@ -1,7 +1,7 @@
 import { MoreMenu } from './MoreMenu';
 import './TabNavigation.css';
 
-export type TabType = 'genres' | 'search' | 'statistics' | 'comparison' | 'radio' | 'recommendations' | 'timeline' | 'discovery' | 'popularity' | 'playlists' | 'mood' | 'history' | 'learning';
+export type TabType = 'genres' | 'search' | 'statistics' | 'comparison' | 'recommendations' | 'timeline' | 'discovery' | 'popularity' | 'playlists' | 'mood' | 'history' | 'learning';
 
 interface TabNavigationProps {
   activeTab: TabType;
@@ -61,18 +61,6 @@ export const TabNavigation = ({ activeTab, onTabChange }: TabNavigationProps) =>
           <line x1="12" y1="22.08" x2="12" y2="12" />
         </svg>
         <span>Compare</span>
-      </button>
-      <button
-        onClick={() => onTabChange('radio')}
-        className={`tab-button ${activeTab === 'radio' ? 'active' : ''}`}
-        type="button"
-        aria-label="Radio mode tab"
-      >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-          <circle cx="12" cy="12" r="10" />
-          <path d="M12 6v6l4 2" />
-        </svg>
-        <span>Radio</span>
       </button>
       <button
         onClick={() => onTabChange('playlists')}

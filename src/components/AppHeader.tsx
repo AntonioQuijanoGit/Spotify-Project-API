@@ -21,18 +21,13 @@ export const AppHeader = ({ activeTab, onTabChange }: AppHeaderProps) => {
           )}
           <div className="header-text">
             <div className="title-wrapper">
-              <div className="title-icon-wrapper">
-                <div className="title-icon">
-                  <Music size={36} strokeWidth={2} />
-                </div>
-                <div className="icon-glow"></div>
+              <div className="title-icon">
+                <Music size={24} strokeWidth={2} />
               </div>
               <div className="title-content">
                 <h1 className="app-title">
-                  <span className="title-main">Music Genre</span>
-                  <span className="title-accent">Explorer</span>
+                  Music Genre Explorer
                 </h1>
-                <div className="title-decoration"></div>
               </div>
             </div>
             <div className="subtitle-wrapper">

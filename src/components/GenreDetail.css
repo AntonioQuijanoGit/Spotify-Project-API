@@ -280,6 +280,12 @@
   
   .modal-header {
     padding: var(--space-xl) var(--space-lg);
+    padding-right: calc(var(--space-lg) + 48px);
+  }
+  
+  .modal-header-content {
+    flex-direction: column;
+    gap: var(--space-md);
   }
   
   .genre-detail-title {
@@ -292,6 +298,53 @@
   
   .detail-section {
     margin-bottom: var(--space-xl);
+  }
+  
+  .genre-detail-description {
+    font-size: var(--text-base);
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-header {
+    padding: var(--space-lg) var(--space-md);
+    padding-right: calc(var(--space-md) + 40px);
+  }
+  
+  .modal-close {
+    top: var(--space-md);
+    right: var(--space-md);
+    width: 36px;
+    height: 36px;
+  }
+  
+  .genre-detail-title {
+    font-size: var(--text-2xl);
+  }
+  
+  .genre-detail-description {
+    font-size: var(--text-sm);
+  }
+  
+  .modal-body {
+    padding: var(--space-md);
+  }
+  
+  .detail-section {
+    margin-bottom: var(--space-lg);
+  }
+  
+  .characteristic-item {
+    font-size: var(--text-sm);
+  }
+  
+  .artist-tag {
+    padding: var(--space-xs) var(--space-sm);
+    font-size: var(--text-xs);
+  }
+  
+  .related-genre-card {
+    padding: var(--space-sm);
   }
 }
 

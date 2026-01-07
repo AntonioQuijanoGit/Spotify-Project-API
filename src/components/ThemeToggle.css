@@ -10,12 +10,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 40px;
-  min-height: 40px;
+  width: 44px;
+  height: 44px;
   position: relative;
   overflow: hidden;
   will-change: transform, background-color;
   box-shadow: var(--shadow-xs);
+  flex-shrink: 0;
 }
 
 .theme-toggle::before {
@@ -51,5 +52,13 @@
 
 .theme-toggle:hover svg {
   transform: rotate(20deg) scale(1.1);
+}
+
+@media (max-width: 640px) {
+  .theme-toggle {
+    width: 40px;
+    height: 40px;
+    padding: var(--space-xs);
+  }
 }
 

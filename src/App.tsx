@@ -15,7 +15,6 @@ import { ToastContainer } from './components/ToastContainer';
 import { GenreComparison } from './components/GenreComparison';
 import { GenreStatistics } from './components/GenreStatistics';
 import { AdvancedFilters } from './components/AdvancedFilters';
-import { RadioMode } from './components/RadioMode';
 import { SmartRecommendations } from './components/SmartRecommendations';
 import { GenreTimeline } from './components/GenreTimeline';
 import { DiscoveryMode } from './components/DiscoveryMode';
@@ -242,12 +241,6 @@ function App() {
                 <GenreComparison onClose={() => setShowComparison(false)} />
               )}
             </>
-          )}
-
-          {activeTab === 'radio' && (
-            <div className="radio-container slide-up">
-              <RadioMode />
-            </div>
           )}
 
           {activeTab === 'recommendations' && (
