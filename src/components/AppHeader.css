@@ -67,12 +67,12 @@
   width: 40px;
   height: 40px;
   border-radius: var(--radius-md);
-  background: var(--color-accent);
+  background: var(--color-text-primary);
   border: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
+  color: var(--color-bg);
   box-shadow: var(--shadow-sm);
   transition: all var(--transition-base);
   position: relative;
@@ -80,11 +80,13 @@
 }
 
 .dark-mode .title-icon {
-  background: var(--color-surface-elevated);
+  background: var(--color-text-primary);
+  color: var(--color-bg);
 }
 
 .title-icon:hover {
-  background: var(--color-accent-hover);
+  background: var(--color-text-primary);
+  opacity: 0.9;
   box-shadow: var(--shadow-md);
   transform: translateY(-1px);
 }

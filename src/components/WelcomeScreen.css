@@ -222,9 +222,9 @@
   font-size: var(--text-base);
   font-weight: 600;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   gap: var(--space-sm);
   transition: all var(--transition-base);
   font-family: inherit;
@@ -233,6 +233,8 @@
   z-index: 10002;
   letter-spacing: -0.01em;
   box-sizing: border-box;
+  margin: 0 !important;
+  text-align: center !important;
 }
 
 .dark-mode .hero-button {
@@ -258,11 +260,13 @@
 
 .hero-button span {
   position: relative;
+  flex-shrink: 0;
 }
 
 .hero-button svg {
   transition: transform var(--transition-base);
   stroke-width: 2.5;
+  flex-shrink: 0;
 }
 
 .hero-button:hover svg {

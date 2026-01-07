@@ -35,7 +35,7 @@
   border-color: var(--color-border-hover);
   transform: translateY(-1px);
   box-shadow: var(--shadow-sm);
-  color: var(--color-accent);
+  color: var(--color-text-primary);
 }
 
 .theme-toggle:active {

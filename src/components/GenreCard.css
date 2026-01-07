@@ -42,9 +42,9 @@
 }
 
 .genre-card:focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-text-primary);
   outline-offset: 2px;
-  border-color: var(--color-accent);
+  border-color: var(--color-text-primary);
   box-shadow: var(--shadow-md), 0 0 0 3px var(--color-border-subtle);
 }
 

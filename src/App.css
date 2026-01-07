@@ -170,11 +170,11 @@
   gap: var(--space-xs);
   padding: var(--space-sm) var(--space-md);
   background: var(--color-surface);
-  border: 2px solid var(--color-accent);
+  border: 2px solid var(--color-text-primary);
   border-radius: var(--radius-md);
   font-size: var(--text-sm);
   font-weight: 600;
-  color: var(--color-accent);
+  color: var(--color-text-primary);
   transition: all var(--transition-base);
   position: relative;
   overflow: hidden;
@@ -184,7 +184,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: var(--color-accent-gradient);
+  background: var(--color-text-primary);
   opacity: 0;
   transition: opacity var(--transition-base);
 }
@@ -194,8 +194,8 @@
 }
 
 .advanced-filters-btn:hover {
-  color: white;
-  border-color: transparent;
+  color: var(--color-bg);
+  border-color: var(--color-text-primary);
   transform: translateY(-2px);
   box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.15);
 }
@@ -214,8 +214,8 @@
 
 .open-comparison-btn {
   padding: var(--space-md) var(--space-xl);
-  background: var(--color-accent-gradient);
-  color: white;
+  background: var(--color-text-primary);
+  color: var(--color-bg);
   border-radius: var(--radius-lg);
   font-weight: 600;
   font-size: var(--text-base);
@@ -223,6 +223,7 @@
   box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.15);
   position: relative;
   overflow: hidden;
+  border: none;
 }
 
 .open-comparison-btn::before {

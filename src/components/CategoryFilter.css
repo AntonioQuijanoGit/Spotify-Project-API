@@ -63,12 +63,12 @@
 }
 
 .category-active:hover {
-  border-color: var(--color-accent-hover);
+  border-color: var(--color-text-primary);
   transform: translateY(-1px) scale(1.02);
 }
 
 .category-active:hover::before {
-  background: var(--color-accent-hover);
+  background: var(--color-text-primary);
 }
 
 @media (max-width: 640px) {
