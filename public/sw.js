@@ -2,15 +2,25 @@ const CACHE_NAME = 'music-explorer-v1';
 const urlsToCache = [
   '/',
   '/index.html',
-  '/src/index.css',
-  '/src/App.css',
 ];
 
 // Install event
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then((cache) => cache.addAll(urlsToCache))
+      .then((cache) => {
+        // Use add() for each URL to handle failures gracefully
+        return Promise.allSettled(
+          urlsToCache.map((url) => cache.add(url).catch((err) => {
+            console.warn(`Failed to cache ${url}:`, err);
+            return null;
+          }))
+        );
+      })
+      .then(() => {
+        // Skip waiting to activate immediately
+        return self.skipWaiting();
+      })
   );
 });
 
@@ -36,6 +46,9 @@ self.addEventListener('activate', (event) => {
           }
         })
       );
+    }).then(() => {
+      // Take control of all pages immediately
+      return self.clients.claim();
     })
   );
 });

@@ -407,13 +407,19 @@
   }
   
   .characteristic-badge {
-    font-size: 10px;
-    padding: 2px var(--space-xs);
+    font-size: 0.625rem;
+    padding: 3px var(--space-xs);
+    min-height: 20px;
   }
   
   .genre-card-category,
   .genre-card-year {
-    font-size: 10px;
+    font-size: 0.625rem;
+  }
+  
+  .genre-card-header {
+    flex-wrap: wrap;
+    gap: var(--space-xs);
   }
 }
 

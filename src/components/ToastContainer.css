@@ -25,10 +25,19 @@
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .toast-container {
+    bottom: var(--space-lg);
     right: var(--space-md);
     left: var(--space-md);
+  }
+}
+
+@media (max-width: 640px) {
+  .toast-container {
+    bottom: 80px; /* Above Get Started button when WelcomeScreen is visible */
+    right: var(--space-sm);
+    left: var(--space-sm);
   }
 }
 

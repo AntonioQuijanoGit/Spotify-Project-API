@@ -181,10 +181,22 @@
 }
 
 /* Responsive */
+@media (max-width: 768px) {
+  .audio-player {
+    gap: var(--space-sm);
+    padding: var(--space-sm);
+  }
+  
+  .player-controls {
+    gap: var(--space-xs);
+  }
+}
+
 @media (max-width: 640px) {
   .audio-player {
     gap: var(--space-sm);
     padding: var(--space-xs);
+    flex-wrap: wrap;
   }
   
   .play-button {
@@ -210,6 +222,27 @@
   .seek-bar::-moz-range-thumb {
     width: 16px;
     height: 16px;
+  }
+  
+  .no-preview-text {
+    font-size: 0.625rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .audio-player {
+    padding: var(--space-xs);
+  }
+  
+  .play-button {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+  }
+  
+  .time-display {
+    font-size: 0.625rem;
   }
 }
 

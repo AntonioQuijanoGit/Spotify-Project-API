@@ -258,6 +258,7 @@
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     white-space: normal;
+    min-height: 2.5em; /* Ensure at least 2 lines visible */
   }
   
   .header-left {

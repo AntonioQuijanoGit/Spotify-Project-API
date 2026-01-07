@@ -77,3 +77,46 @@
   color: var(--color-text-primary);
 }
 
+@media (max-width: 768px) {
+  .advanced-filters-modal {
+    max-width: 100%;
+  }
+  
+  .year-inputs {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+  
+  .filter-actions {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+  
+  .apply-btn,
+  .reset-btn {
+    width: 100%;
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 480px) {
+  .filter-section {
+    margin-bottom: var(--space-lg);
+  }
+  
+  .filter-section h3 {
+    font-size: var(--text-base);
+  }
+  
+  .filter-tag {
+    padding: var(--space-xs) var(--space-sm);
+    font-size: var(--text-xs);
+    min-height: 36px;
+  }
+  
+  .year-input {
+    padding: var(--space-sm);
+    font-size: var(--text-sm);
+  }
+}
+

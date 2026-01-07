@@ -33,7 +33,7 @@
 
 @media (max-width: 768px) {
   .empty-state {
-    padding: var(--space-3xl) var(--space-lg);
+    padding: var(--space-2xl) var(--space-lg);
   }
   
   .empty-title {
@@ -42,6 +42,26 @@
   
   .empty-description {
     font-size: var(--text-base);
+  }
+}
+
+@media (max-width: 480px) {
+  .empty-state {
+    padding: var(--space-xl) var(--space-md);
+  }
+  
+  .empty-title {
+    font-size: var(--text-xl);
+  }
+  
+  .empty-description {
+    font-size: var(--text-sm);
+  }
+  
+  .empty-state svg {
+    width: 48px;
+    height: 48px;
+    margin-bottom: var(--space-md);
   }
 }
 

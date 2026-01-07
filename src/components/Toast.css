@@ -83,12 +83,38 @@
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .toast {
     right: var(--space-md);
     left: var(--space-md);
     min-width: auto;
-    max-width: none;
+    max-width: calc(100vw - var(--space-md) * 2);
+    padding: var(--space-sm) var(--space-md);
+  }
+  
+  .toast-message {
+    font-size: var(--text-xs);
+  }
+}
+
+@media (max-width: 640px) {
+  .toast {
+    right: var(--space-sm);
+    left: var(--space-sm);
+    min-width: auto;
+    max-width: calc(100vw - var(--space-sm) * 2);
+    padding: var(--space-sm);
+    bottom: 80px; /* Above Get Started button when WelcomeScreen is visible */
+  }
+  
+  .toast-message {
+    font-size: var(--text-xs);
+    line-height: var(--leading-normal);
+  }
+  
+  .toast-close {
+    min-width: 28px;
+    min-height: 28px;
   }
 }
 

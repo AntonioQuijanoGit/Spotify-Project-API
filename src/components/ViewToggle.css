@@ -29,6 +29,24 @@
   box-shadow: var(--shadow-xs);
 }
 
+@media (max-width: 640px) {
+  .view-toggle {
+    gap: var(--space-xs);
+    padding: var(--space-xs);
+  }
+  
+  .view-toggle-btn {
+    padding: var(--space-xs);
+    min-width: 36px;
+    min-height: 36px;
+  }
+  
+  .view-toggle-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
 
 
 

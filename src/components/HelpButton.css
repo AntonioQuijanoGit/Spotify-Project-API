@@ -51,12 +51,31 @@
   transform: scale(1.1);
 }
 
+@media (max-width: 768px) {
+  .help-button {
+    bottom: 80px; /* Above Get Started button */
+    right: var(--space-md);
+    width: 44px;
+    height: 44px;
+  }
+  
+  .help-button svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
 @media (max-width: 640px) {
   .help-button {
-    bottom: var(--space-lg);
-    right: var(--space-lg);
-    width: 48px;
-    height: 48px;
+    bottom: 70px; /* Above Get Started button */
+    right: var(--space-sm);
+    width: 40px;
+    height: 40px;
+  }
+  
+  .help-button svg {
+    width: 14px;
+    height: 14px;
   }
 }
 
