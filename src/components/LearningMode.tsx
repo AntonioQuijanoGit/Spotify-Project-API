@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useLearningProgress } from '../hooks/useLearningProgress';
-import { genres } from '../data/genres';
 import { useToast } from '../hooks/useToast';
 import './LearningMode.css';
 
