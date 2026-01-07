@@ -9,15 +9,29 @@
   height: 100dvh;
   min-height: 100vh;
   min-height: -webkit-fill-available;
-  display: flex;
+  display: flex !important;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: var(--space-2xl) var(--space-lg);
   background: var(--color-bg);
+  background-color: var(--color-bg);
   overflow: hidden;
-  z-index: 10001;
+  z-index: 10001 !important;
   animation: fadeIn 0.3s ease-out;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+.light-mode .welcome-hero {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+}
+
+.dark-mode .welcome-hero {
+  background: #0d1117 !important;
+  background-color: #0d1117 !important;
 }
 
 .welcome-hero.hiding {
@@ -82,6 +96,8 @@
   align-items: center;
   text-align: center;
   animation: slideUp 0.4s ease-out 0.1s both;
+  opacity: 1;
+  visibility: visible;
 }
 
 @keyframes slideUp {
@@ -101,6 +117,8 @@
   align-items: center;
   gap: var(--space-xl);
   width: 100%;
+  opacity: 1;
+  visibility: visible;
 }
 
 .hero-icon-wrapper {
@@ -118,6 +136,8 @@
   color: var(--color-bg);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   transition: transform var(--transition-base);
+  opacity: 1;
+  visibility: visible;
 }
 
 .dark-mode .hero-icon {
@@ -137,6 +157,8 @@
   margin: 0;
   letter-spacing: -0.02em;
   line-height: 1.2;
+  opacity: 1;
+  visibility: visible;
 }
 
 .hero-description {
@@ -146,6 +168,8 @@
   max-width: 480px;
   margin: 0;
   font-weight: 400;
+  opacity: 1;
+  visibility: visible;
 }
 
 .hero-features {
@@ -216,6 +240,7 @@
   padding: var(--space-lg) var(--space-xl);
   padding-bottom: max(var(--space-lg), env(safe-area-inset-bottom, var(--space-lg)));
   background: var(--color-text-primary);
+  background-color: var(--color-text-primary);
   color: var(--color-bg);
   border: none;
   border-radius: 0;
@@ -235,6 +260,8 @@
   box-sizing: border-box;
   margin: 0 !important;
   text-align: center !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .dark-mode .hero-button {
@@ -280,6 +307,18 @@
     padding-bottom: 80px;
     justify-content: flex-start;
     padding-top: var(--space-2xl);
+    background: var(--color-bg) !important;
+    background-color: var(--color-bg) !important;
+  }
+  
+  .light-mode .welcome-hero {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+  }
+  
+  .dark-mode .welcome-hero {
+    background: #0d1117 !important;
+    background-color: #0d1117 !important;
   }
 
   .welcome-hero-content {
