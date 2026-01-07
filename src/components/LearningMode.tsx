@@ -9,7 +9,7 @@ interface Lesson {
   id: string;
   title: string;
   type: LessonType;
-  content: string;
+  content?: string;
   quiz?: QuizQuestion[];
 }
 
@@ -149,7 +149,7 @@ export const LearningMode = () => {
   const [currentLessonIndex, setCurrentLessonIndex] = useState(0);
   const [quizAnswers, setQuizAnswers] = useState<Record<string, number>>({});
   const [showResults, setShowResults] = useState(false);
-  const { progress, completeLesson, addQuizScore, isLessonCompleted, getQuizScore: getStoredQuizScore, getProgressPercentage, unlockBadge } = useLearningProgress();
+  const { progress, completeLesson, addQuizScore, isLessonCompleted, getProgressPercentage, unlockBadge } = useLearningProgress();
   const { success, info } = useToast();
 
   const currentLesson = lessons[currentLessonIndex];
@@ -371,10 +371,12 @@ export const LearningMode = () => {
               </div>
             ) : (
               <div className="tutorial-content">
-                <div 
-                  dangerouslySetInnerHTML={{ __html: currentLesson.content }} 
-                  className="tutorial-html"
-                />
+                {currentLesson.content && (
+                  <div 
+                    dangerouslySetInnerHTML={{ __html: currentLesson.content }} 
+                    className="tutorial-html"
+                  />
+                )}
                 {!isCompleted && (
                   <button
                     onClick={handleCompleteLesson}
