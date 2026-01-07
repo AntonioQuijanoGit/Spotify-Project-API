@@ -6,7 +6,7 @@
   "devCommand": "npm run dev",
   "rewrites": [
     {
-      "source": "/((?!assets|favicon|sw.js|vite.svg).*)",
+      "source": "/((?!assets|favicon|sw\\.js|vite\\.svg|.*\\.(js|css|svg|png|jpg|jpeg|gif|ico|woff|woff2|ttf|eot)).*)",
       "destination": "/index.html"
     }
   ],
