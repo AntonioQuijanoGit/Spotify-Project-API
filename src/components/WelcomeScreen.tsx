@@ -125,13 +125,14 @@ export function WelcomeScreen() {
               <span>Curated Playlists</span>
             </div>
           </div>
-
-          <button className="hero-button" onClick={getStarted}>
-            Get Started
-            <ArrowRight size={20} strokeWidth={2} />
-          </button>
         </div>
       </div>
+      
+      {/* Button outside scrollable content */}
+      <button className="hero-button" onClick={getStarted}>
+        Get Started
+        <ArrowRight size={20} strokeWidth={2} />
+      </button>
     </div>
   );
 }
